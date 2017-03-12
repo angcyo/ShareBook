@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_view"
+        style="@style/BaseMainTextStyle"
+        android:layout_marginStart="@dimen/base_mdpi"
+        android:drawablePadding="@dimen/base_ldpi"
+        android:drawableStart="@drawable/base_vertical_color_line"
+        tools:text="测试文本"/>
+
+    <com.angcyo.uiview.recycler.RRecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="140dp"
+        android:tag="H"/>
+
+</LinearLayout>

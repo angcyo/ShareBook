@@ -1,0 +1,3 @@
+include ':ShareBook'
+include ':RLibrary:uiview', ':RLibrary:library'//':RLibrary:imagepicker'
+

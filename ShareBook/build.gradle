@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    signingConfigs {
+        angcyo {
+            keyAlias 'angcyo'
+            keyPassword 'angcyo'
+            storeFile file('../angcyo.jks')
+            storePassword 'angcyo'
+        }
+    }
+
+    compileSdkVersion rootProject.C_SDK as int
+    buildToolsVersion rootProject.B_TOOLS
+
+    defaultConfig {
+        minSdkVersion rootProject.M_SDK as int
+        targetSdkVersion rootProject.T_SDK as int
+        applicationId "com.angcyo.sharebook"
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.angcyo
+        }
+        debug {
+            signingConfig signingConfigs.angcyo
+        }
+    }
+
+    getApplicationVariants().all { variant ->
+        variant.outputs.each { output ->
+            def appName = "ShareBook-${variant.buildType.name}-${variant.versionName}.apk"
+            output.outputFile = new File(output.outputFile.parent, appName)
+        }
+    }
+    packagingOptions {
+//        exclude 'META-INF/DEPENDENCIES'
+//        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+//        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    dexOptions {
+        incremental true
+        preDexLibraries false
+        jumboMode true
+        javaMaxHeapSize "4g"
+    }
+}
+
+dependencies {
+    compile project(':RLibrary:uiview')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+}
