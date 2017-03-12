@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.adapter.BookAdapter;
 import com.angcyo.uiview.base.UIRecyclerUIView;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
@@ -36,9 +37,17 @@ public class MyOrderUIView extends UIRecyclerUIView {
             @Override
             protected void onBindDataView(RBaseViewHolder holder, int posInData, MainItemBean dataBean) {
                 holder.tv(R.id.text_view).setText("pos:" + posInData);
-                holder.reV(R.id.recycler_view);
+                holder.reV(R.id.recycler_view).setAdapter(new BookAdapter(mActivity, createBooks()));
             }
         };
+    }
+    
+    private List<String> createBooks() {
+        List<String> beanList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            beanList.add("");
+        }
+        return beanList;
     }
 
     @Override
