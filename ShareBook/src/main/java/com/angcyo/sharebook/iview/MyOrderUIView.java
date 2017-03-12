@@ -41,7 +41,7 @@ public class MyOrderUIView extends UIRecyclerUIView {
             }
         };
     }
-    
+
     private List<String> createBooks() {
         List<String> beanList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
@@ -69,8 +69,13 @@ public class MyOrderUIView extends UIRecyclerUIView {
     @Override
     public void onViewShowFirst(Bundle bundle) {
         super.onViewShowFirst(bundle);
-        mExBaseAdapter.setShowState(IShowState.NORMAL);
         mExBaseAdapter.resetAllData(createAllDatas());
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mExBaseAdapter.setShowState(IShowState.NORMAL);
+            }
+        }, 2000);
     }
 
     private List<MainItemBean> createAllDatas() {
