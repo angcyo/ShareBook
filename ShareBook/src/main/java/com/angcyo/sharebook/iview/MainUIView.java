@@ -1,5 +1,6 @@
 package com.angcyo.sharebook.iview;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -32,6 +33,7 @@ public class MainUIView extends UIIViewImpl {
 
     @Override
     protected View inflateBaseView(FrameLayout container, LayoutInflater inflater) {
+        container.setBackgroundColor(Color.WHITE);
         return inflater.inflate(R.layout.view_main, container);
     }
 
