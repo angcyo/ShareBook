@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:padding="@dimen/base_xhdpi">
+
+    <com.angcyo.uiview.widget.RImageView
+        android:layout_width="@dimen/base_50dpi"
+        android:layout_height="@dimen/base_50dpi"
+        android:src="@mipmap/ic_launcher"/>
+
+    <com.angcyo.uiview.widget.RTextView
+        style="@style/BaseMainTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/base_xhdpi"
+        android:text="用户名称"/>
+
+</LinearLayout>
