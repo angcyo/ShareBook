@@ -11,6 +11,7 @@ import com.angcyo.uiview.R;
 import com.angcyo.uiview.RApplication;
 
 /**
+ * 可以设置top分割线, 和中间分割线样式的{@link Item}
  * Created by angcyo on 2017-03-12.
  */
 
@@ -35,6 +36,8 @@ public abstract class SingleItem implements Item {
                 this.topOffset = RApplication.getApp().getResources().getDimensionPixelSize(R.dimen.base_xhdpi);
                 break;
             case LINE:
+                this.topOffset = RApplication.getApp().getResources().getDimensionPixelSize(R.dimen.base_line);
+                break;
             case TOP_LINE:
                 this.leftOffset = RApplication.getApp().getResources().getDimensionPixelSize(R.dimen.base_xhdpi);
                 this.topOffset = RApplication.getApp().getResources().getDimensionPixelSize(R.dimen.base_line);
