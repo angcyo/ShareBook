@@ -9,7 +9,7 @@ import com.angcyo.sharebook.adapter.BookAdapter;
 import com.angcyo.uiview.base.UIRecyclerUIView;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
-import com.angcyo.uiview.recycler.RExBaseAdapter;
+import com.angcyo.uiview.recycler.adapter.RExBaseAdapter;
 import com.angcyo.uiview.recycler.widget.IShowState;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class MyOrderUIView extends UIRecyclerUIView {
             public void run() {
                 mExBaseAdapter.setShowState(IShowState.NORMAL);
             }
-        }, 2000);
+        }, 1000);
     }
 
     private List<MainItemBean> createAllDatas() {

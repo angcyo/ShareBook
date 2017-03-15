@@ -3,8 +3,8 @@ package com.angcyo.sharebook.adapter;
 import android.content.Context;
 
 import com.angcyo.sharebook.R;
-import com.angcyo.uiview.recycler.RBaseAdapter;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
+import com.angcyo.uiview.recycler.adapter.RBaseAdapter;
 
 import java.util.List;
 

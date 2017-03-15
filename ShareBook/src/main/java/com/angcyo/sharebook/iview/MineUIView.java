@@ -4,6 +4,7 @@ import com.angcyo.sharebook.R;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
 import com.angcyo.uiview.base.UIItemUIView;
+import com.angcyo.uiview.model.TitleBarPattern;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
 import com.angcyo.uiview.widget.ItemInfoLayout;
 
@@ -20,6 +21,10 @@ public class MineUIView extends UIItemUIView<SingleItem> {
         return "我";
     }
 
+    @Override
+    protected TitleBarPattern getTitleBar() {
+        return super.getTitleBar().setShowBackImageView(false);
+    }
 
     @Override
     protected int getItemLayoutId(int viewType) {
@@ -58,7 +63,7 @@ public class MineUIView extends UIItemUIView<SingleItem> {
                 itemLayout.setItemText("测试条目:" + posInData);
             }
         });
-        items.add(new SingleItem(SingleItem.Type.LINE) {
+        items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
             @Override
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
                 ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
