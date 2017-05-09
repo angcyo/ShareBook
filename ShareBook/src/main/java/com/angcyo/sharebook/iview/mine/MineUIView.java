@@ -1,9 +1,12 @@
-package com.angcyo.sharebook.iview;
+package com.angcyo.sharebook.iview.mine;
+
+import android.view.View;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.iview.base.BaseItemUIView;
+import com.angcyo.sharebook.iview.login.LoginUIView;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
-import com.angcyo.uiview.base.UIItemUIView;
 import com.angcyo.uiview.model.TitleBarPattern;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
 import com.angcyo.uiview.widget.ItemInfoLayout;
@@ -14,7 +17,7 @@ import java.util.List;
  * Created by angcyo on 2017-03-11.
  */
 
-public class MineUIView extends UIItemUIView<SingleItem> {
+public class MineUIView extends BaseItemUIView {
 
     @Override
     protected String getTitleString() {
@@ -39,7 +42,12 @@ public class MineUIView extends UIItemUIView<SingleItem> {
         items.add(new SingleItem(SingleItem.Type.TOP) {
             @Override
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
-
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOtherILayout.startIView(new LoginUIView().setEnableClipMode(ClipMode.CLIP_BOTH, v));
+                    }
+                });
             }
         });
         items.add(new SingleItem(SingleItem.Type.TOP) {

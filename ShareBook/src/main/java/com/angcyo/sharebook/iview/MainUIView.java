@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.iview.mine.MineUIView;
 import com.angcyo.uiview.container.UILayoutImpl;
 import com.angcyo.uiview.container.UIParam;
 import com.angcyo.uiview.github.tablayout.CommonTabLayout;

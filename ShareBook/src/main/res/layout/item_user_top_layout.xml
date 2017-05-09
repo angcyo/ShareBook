@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.angcyo.uiview.viewgroup.RLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/base_bg_selector"
     android:orientation="horizontal"
-    android:background="@android:color/white"
-    android:padding="@dimen/base_xhdpi">
+    android:padding="@dimen/base_xhdpi"
+    app:r_background="@color/base_white">
 
     <com.angcyo.uiview.widget.RImageView
+        android:id="@+id/image_view"
         android:layout_width="@dimen/base_50dpi"
         android:layout_height="@dimen/base_50dpi"
         android:src="@mipmap/ic_launcher"/>
 
     <com.angcyo.uiview.widget.RTextView
+        android:id="@+id/text_view"
         style="@style/BaseMainTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,4 +24,4 @@
         android:layout_marginStart="@dimen/base_xhdpi"
         android:text="用户名称"/>
 
-</LinearLayout>
+</com.angcyo.uiview.viewgroup.RLinearLayout>
