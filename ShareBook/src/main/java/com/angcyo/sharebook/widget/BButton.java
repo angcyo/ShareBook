@@ -3,6 +3,8 @@ package com.angcyo.sharebook.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
@@ -28,6 +30,10 @@ public class BButton extends RTextView {
 
     public BButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if (isInEditMode()) {
+            setGravity(Gravity.CENTER);
+            ViewCompat.setBackground(this, ContextCompat.getDrawable(context, R.drawable.base_bg_selector));
+        }
     }
 
     public BButton(Context context, AttributeSet attrs, int defStyleAttr) {

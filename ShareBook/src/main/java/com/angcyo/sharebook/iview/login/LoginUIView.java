@@ -7,14 +7,17 @@ import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.http.BSub;
 import com.angcyo.sharebook.http.P;
 import com.angcyo.sharebook.http.RxBook;
+import com.angcyo.sharebook.http.bean.TokenBean;
 import com.angcyo.sharebook.http.service.User;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
+import com.angcyo.sharebook.util.Action;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
 import com.angcyo.uiview.dialog.UILoading;
 import com.angcyo.uiview.model.TitleBarPattern;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
+import com.angcyo.uiview.utils.T_;
 import com.angcyo.uiview.widget.ExEditText;
 
 import java.util.List;
@@ -45,7 +48,7 @@ public class LoginUIView extends BaseItemUIView {
     protected void createItems(List<SingleItem> items) {
         items.add(new SingleItem() {
             @Override
-            public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
+            public void onBindView(RBaseViewHolder holder, final int posInData, Item dataBean) {
                 TextInputLayout userNameLayout = holder.v(R.id.user_name_layout);
                 TextInputLayout userPasswordLayout = holder.v(R.id.user_password_layout);
 
@@ -67,6 +70,12 @@ public class LoginUIView extends BaseItemUIView {
                         }
                     }
                 });
+                holder.v(R.id.register_view).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        replaceIView(new RegisterUIView().setEnableClipMode(ClipMode.CLIP_BOTH, v));
+                    }
+                });
             }
         });
     }
@@ -74,12 +83,14 @@ public class LoginUIView extends BaseItemUIView {
     private void login(String uid, String pwd) {
         UILoading.show2(mOtherILayout);
         add(RRetrofit.create(User.class)
-                .login(P.b("action:10001", "uid:" + uid, "pwd:" + pwd))
-                .compose(RxBook.transformer(String.class))
-                .subscribe(new BSub<String>() {
+                .login(P.b(Action.LOGIN, "uid:" + uid, "pwd:" + pwd))
+                .compose(RxBook.transformer(TokenBean.class))
+                .subscribe(new BSub<TokenBean>() {
                     @Override
-                    public void onSucceed(String bean) {
+                    public void onSucceed(TokenBean bean) {
                         super.onSucceed(bean);
+                        T_.show("登录成功");
+                        finishIView();
                     }
 
                     @Override

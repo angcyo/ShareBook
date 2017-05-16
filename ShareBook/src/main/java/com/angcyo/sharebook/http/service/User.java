@@ -30,4 +30,7 @@ public interface User {
     @POST("activity.php")
     Observable<ResponseBody> login(@QueryMap Map<String, String> map);
 
+    @POST("activity.php")
+    Observable<ResponseBody> register(@QueryMap Map<String, String> map);
+
 }
