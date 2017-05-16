@@ -1,6 +1,7 @@
 package com.angcyo.sharebook;
 
 import com.angcyo.library.utils.L;
+import com.angcyo.sharebook.http.RxBook;
 import com.angcyo.sharebook.skin.MainSkin;
 import com.angcyo.uiview.RApplication;
 import com.angcyo.uiview.Root;
@@ -23,5 +24,7 @@ public class App extends RApplication {
         SkinHelper.init(new MainSkin(this));
 
         RRetrofit.BASE_URL = "http://119.23.221.242/";
+
+        RxBook.OK_CODE = 0;
     }
 }

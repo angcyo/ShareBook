@@ -27,6 +27,9 @@ import static com.angcyo.uiview.net.Rx.RETRY_COUNT;
  */
 
 public class RxBook {
+
+    public static int OK_CODE = 200;
+
     public static <T> Observable.Transformer<ResponseBody, T> transformer(final Class<T> type) {
         return new Observable.Transformer<ResponseBody, T>() {
 
@@ -48,7 +51,7 @@ public class RxBook {
                                     JSONObject jsonObject = new JSONObject(body);
                                     int code = jsonObject.getInt("code");
 
-                                    if (code == 200) {
+                                    if (code == OK_CODE) {
                                         //请求成功
                                         String data = jsonObject.getString("data");
                                         if (!TextUtils.isEmpty(data)) {
