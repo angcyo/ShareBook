@@ -22,6 +22,6 @@ public class App extends RApplication {
 
         SkinHelper.init(new MainSkin(this));
 
-        RRetrofit.BASE_URL = "http://xiaoya.ngrok.cc/";
+        RRetrofit.BASE_URL = "http://119.23.221.242/";
     }
 }

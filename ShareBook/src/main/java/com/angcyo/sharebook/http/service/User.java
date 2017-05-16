@@ -27,7 +27,7 @@ public interface User {
      * uid	是	string	用户名
      * pwd	是	string	密码
      */
-    @POST("user/login.php")
+    @POST("activity.php")
     Observable<ResponseBody> login(@QueryMap Map<String, String> map);
 
 }

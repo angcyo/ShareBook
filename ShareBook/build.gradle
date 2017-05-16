@@ -17,7 +17,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.M_SDK as int
         targetSdkVersion rootProject.T_SDK as int
-        applicationId "com.angcyo.sharebook"
+        applicationId "com.angcyo.easybook"
         versionCode 1
         versionName "1.0"
         multiDexEnabled true

@@ -4,15 +4,16 @@ import android.support.design.widget.TextInputLayout;
 import android.view.View;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.http.BSub;
 import com.angcyo.sharebook.http.P;
+import com.angcyo.sharebook.http.RxBook;
 import com.angcyo.sharebook.http.service.User;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
+import com.angcyo.uiview.dialog.UILoading;
 import com.angcyo.uiview.model.TitleBarPattern;
 import com.angcyo.uiview.net.RRetrofit;
-import com.angcyo.uiview.net.RSubscriber;
-import com.angcyo.uiview.net.Rx;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
 import com.angcyo.uiview.widget.ExEditText;
 
@@ -71,14 +72,21 @@ public class LoginUIView extends BaseItemUIView {
     }
 
     private void login(String uid, String pwd) {
-        RRetrofit.create(User.class)
+        UILoading.show2(mOtherILayout);
+        add(RRetrofit.create(User.class)
                 .login(P.b("action:10001", "uid:" + uid, "pwd:" + pwd))
-                .compose(Rx.transformer(String.class))
-                .subscribe(new RSubscriber<String>() {
+                .compose(RxBook.transformer(String.class))
+                .subscribe(new BSub<String>() {
                     @Override
                     public void onSucceed(String bean) {
                         super.onSucceed(bean);
                     }
-                });
+
+                    @Override
+                    public void onEnd() {
+                        super.onEnd();
+                        UILoading.hide();
+                    }
+                }));
     }
 }

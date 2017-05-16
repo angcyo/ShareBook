@@ -60,10 +60,10 @@ public class MainUIView extends UIIViewImpl {
     public void onViewLoad() {
         super.onViewLoad();
         ArrayList<CustomTabEntity> entities = new ArrayList<>();
-        entities.add(new TabEntity("书场", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
+        entities.add(new TabEntity("书库", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
         entities.add(new TabEntity("推荐", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
         entities.add(new TabEntity("订单", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
-        entities.add(new TabEntity("我", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
+        entities.add(new TabEntity("我的", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
 
         TabLayoutUtil.initCommonTab(mCommonTabLayout, entities, new OnTabSelectListener() {
             @Override
