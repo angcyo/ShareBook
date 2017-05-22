@@ -25,7 +25,7 @@ android {
 
     productFlavors {
         //develop
-        dev {
+        _dev {
             minSdkVersion 21
             buildConfigField "boolean", "SHOW_DEBUG", "true"
         }
