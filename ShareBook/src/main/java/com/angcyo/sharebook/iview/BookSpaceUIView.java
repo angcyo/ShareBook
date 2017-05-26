@@ -52,6 +52,8 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, headerBean.mBeanList));
 
                 new PagerSnapHelper().attachToRecyclerView(recyclerView);
+
+                recyclerView.setEnableAutoScroll(true);
             }
 
             @Override
@@ -60,6 +62,8 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
                 recyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, dataBean.mBeanList));
+
+                recyclerView.setEnableAutoScroll(false);
             }
 
             @Override
@@ -68,6 +72,8 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
                 recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, footerBean.mBeanList));
+
+                recyclerView.setEnableAutoScroll(false);
             }
         };
     }
