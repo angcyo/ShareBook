@@ -1,19 +1,24 @@
 package com.angcyo.sharebook.iview;
 
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.RelativeLayout;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.adapter.BookAdapter;
-import com.angcyo.uiview.base.UIRecyclerUIView;
+import com.angcyo.sharebook.http.BSub;
+import com.angcyo.sharebook.http.P;
+import com.angcyo.sharebook.http.RxBook;
+import com.angcyo.sharebook.http.bean.HomeBean;
+import com.angcyo.sharebook.http.service.Home;
+import com.angcyo.sharebook.iview.base.BaseRecyclerUIView;
+import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.net.Rx;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
+import com.angcyo.uiview.recycler.RRecyclerView;
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter;
 import com.angcyo.uiview.recycler.widget.IShowState;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -24,34 +29,48 @@ import rx.functions.Func1;
  * Created by angcyo on 2017-03-11.
  */
 
-public class BookSpaceUIView extends UIRecyclerUIView {
+public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
+        BookSpaceUIView.DBean,
+        BookSpaceUIView.FBean> {
     @Override
     protected RExBaseAdapter createAdapter() {
-        return new RExBaseAdapter<String, MainItemBean, String>(mActivity) {
+        return new RExBaseAdapter<BookSpaceUIView.HBean,
+                BookSpaceUIView.DBean,
+                BookSpaceUIView.FBean>(mActivity) {
             @Override
             protected int getItemLayoutId(int viewType) {
                 return R.layout.item_home_type_layout;
             }
 
             @Override
-            protected void onBindDataView(RBaseViewHolder holder, int posInData, MainItemBean dataBean) {
-                holder.tv(R.id.text_view).setText("类型:" + posInData);
-                holder.reV(R.id.recycler_view).setAdapter(new BookAdapter(mActivity, createBooks()));
+            protected void onBindHeaderView(RBaseViewHolder holder, int posInHeader, BookSpaceUIView.HBean headerBean) {
+                holder.tv(R.id.text_view).setText(headerBean.type);
+                RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
+                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+                recyclerView.setAdapter(new BookAdapter<>(mActivity, headerBean.mBeanList));
+            }
+
+            @Override
+            protected void onBindDataView(RBaseViewHolder holder, int posInData, BookSpaceUIView.DBean dataBean) {
+                holder.tv(R.id.text_view).setText(dataBean.type);
+                RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
+                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+                recyclerView.setAdapter(new BookAdapter<>(mActivity, dataBean.mBeanList));
+            }
+
+            @Override
+            protected void onBindFooterView(RBaseViewHolder holder, int posInFooter, BookSpaceUIView.FBean footerBean) {
+                holder.tv(R.id.text_view).setText(footerBean.type);
+                RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
+                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+                recyclerView.setAdapter(new BookAdapter<>(mActivity, footerBean.mBeanList));
             }
         };
     }
 
-    private List<String> createBooks() {
-        List<String> beanList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            beanList.add("");
-        }
-        return beanList;
-    }
-
     @Override
     protected String getTitleString() {
-        return "书场";
+        return "书库";
     }
 
     @Override
@@ -59,35 +78,27 @@ public class BookSpaceUIView extends UIRecyclerUIView {
         return new RBaseItemDecoration(getResources().getDimensionPixelSize(R.dimen.base_xhdpi), getResources().getColor(R.color.default_base_line));
     }
 
-    @Override
-    protected void afterInflateView(RelativeLayout baseContentLayout) {
-        mExBaseAdapter.setShowState(IShowState.LOADING);
-    }
 
     @Override
-    public void onViewShowFirst(Bundle bundle) {
-        super.onViewShowFirst(bundle);
-        mExBaseAdapter.resetAllData(createAllDatas());
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mExBaseAdapter.setShowState(IShowState.NORMAL);
-            }
-        }, 1000);
-    }
+    protected void onUILoadData() {
+        add(RRetrofit.create(Home.class)
+                .home(P.b())
+                .compose(RxBook.transformer(HomeBean.class))
+                .subscribe(new BSub<HomeBean>() {
+                    @Override
+                    public void onSucceed(HomeBean bean) {
+                        if (bean != null) {
+                            onUILoadFinish();
 
-    @Override
-    public void onViewShow(Bundle bundle) {
-        super.onViewShow(bundle);
-        //test();
-    }
+                            mExBaseAdapter.setHeaderData(new HBean(bean.getLatern()));
+                            mExBaseAdapter.setData(new DBean(bean.getTopical()));
+                            mExBaseAdapter.setFooterData(new FBean(bean.getSpecial()));
 
-    private List<MainItemBean> createAllDatas() {
-        List<MainItemBean> beanList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            beanList.add(new MainItemBean());
-        }
-        return beanList;
+                            HomeBean.BASE_IMG_PATH = bean.getPath();
+                            mExBaseAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }));
     }
 
     private void test() {
@@ -140,6 +151,30 @@ public class BookSpaceUIView extends UIRecyclerUIView {
                 .subscribe();
     }
 
-    public static class MainItemBean {
+    public static class HBean {
+        public String type = "Latern";
+        public List<HomeBean.LaternBean> mBeanList;
+
+        public HBean(List<HomeBean.LaternBean> beanList) {
+            mBeanList = beanList;
+        }
+    }
+
+    public static class DBean {
+        public String type = "Topical";
+        public List<HomeBean.TopicalBean> mBeanList;
+
+        public DBean(List<HomeBean.TopicalBean> beanList) {
+            mBeanList = beanList;
+        }
+    }
+
+    public static class FBean {
+        public String type = "Special";
+        public List<HomeBean.SpecialBean> mBeanList;
+
+        public FBean(List<HomeBean.SpecialBean> beanList) {
+            mBeanList = beanList;
+        }
     }
 }

@@ -82,6 +82,7 @@ android {
 dependencies {
     compile project(':RLibrary:uiview')
     compile project(':RLibrary:rcode')
+    compile project(':RLibrary:imagepicker')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

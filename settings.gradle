@@ -1,3 +1,4 @@
 include ':ShareBook'
-include ':RLibrary:uiview', ':RLibrary:library'//':RLibrary:imagepicker'
+include ':RLibrary:uiview', ':RLibrary:library'
+include ':RLibrary:imagepicker'
 include ':RLibrary:rcode'

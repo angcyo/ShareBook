@@ -73,7 +73,7 @@ public class GoodSpaceUIView extends UIRecyclerUIView {
         postDelayed(new Runnable() {
             @Override
             public void run() {
-                mExBaseAdapter.setShowState(IShowState.NORMAL);
+                mExBaseAdapter.setShowState(IShowState.EMPTY);
             }
         }, 1000);
     }
