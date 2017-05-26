@@ -101,7 +101,7 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                             onUILoadFinish();
 
                             mExBaseAdapter.setHeaderData(new HBean(bean.getLatern()));
-                            mExBaseAdapter.setData(new DBean(bean.getTopical()));
+                            mExBaseAdapter.setDataData(new DBean(bean.getTopical()));
                             mExBaseAdapter.setFooterData(new FBean(bean.getSpecial()));
 
                             HomeBean.BASE_IMG_PATH = bean.getPath();
