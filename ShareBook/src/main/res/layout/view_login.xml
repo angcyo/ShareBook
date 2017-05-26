@@ -32,6 +32,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/base_bg_selector"
                 android:clickable="true"
+                android:paddingBottom="@dimen/base_hdpi"
+                android:paddingTop="@dimen/base_hdpi"
                 android:text="快速注册"/>
 
             <Space
@@ -44,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/base_bg_selector"
                 android:clickable="true"
+                android:paddingBottom="@dimen/base_hdpi"
+                android:paddingTop="@dimen/base_hdpi"
                 android:text="忘记密码"/>
 
         </LinearLayout>

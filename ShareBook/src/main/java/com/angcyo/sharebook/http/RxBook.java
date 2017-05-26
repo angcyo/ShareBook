@@ -50,10 +50,14 @@ public class RxBook {
 
                                     JSONObject jsonObject = new JSONObject(body);
                                     int code = jsonObject.getInt("code");
+                                    String msg = jsonObject.getString("msg");
 
                                     if (code == OK_CODE) {
                                         //请求成功
                                         String data = jsonObject.getString("data");
+                                        if (TextUtils.isEmpty(data) || "null".equalsIgnoreCase(data)) {
+                                            data = msg;
+                                        }
                                         if (!TextUtils.isEmpty(data)) {
                                             if (type == String.class) {
                                                 bean = (T) data;
@@ -64,7 +68,6 @@ public class RxBook {
                                         }
                                     } else {
                                         //请求成功, 但是有错误
-                                        String msg = jsonObject.getString("msg");
 
                                         throw new RException(code, msg, "no more");
                                     }

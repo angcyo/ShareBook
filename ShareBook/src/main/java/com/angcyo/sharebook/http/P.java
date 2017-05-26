@@ -4,6 +4,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.angcyo.sharebook.App;
+import com.angcyo.uiview.RApplication;
 import com.angcyo.uiview.net.rsa.RSA;
 import com.angcyo.uiview.utils.RUtils;
 
@@ -57,7 +58,8 @@ public class P {
         result.put("time_stamp", String.valueOf(time));
 
             /*终端类型*/
-        result.put("client_type", "android");
+        result.put("devtype", "android");
+        result.put("devtoken", RApplication.getIMEI());
         result.put("os", Build.VERSION.RELEASE);
         result.put("cpu", Build.CPU_ABI);
         result.put("model", Build.MODEL);

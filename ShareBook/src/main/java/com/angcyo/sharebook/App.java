@@ -23,7 +23,7 @@ public class App extends RApplication {
 
         SkinHelper.init(new MainSkin(this));
 
-        RRetrofit.BASE_URL = "http://119.23.221.242/";
+        RRetrofit.BASE_URL = "http://119.23.221.242/api/";
 
         RxBook.OK_CODE = 0;
     }

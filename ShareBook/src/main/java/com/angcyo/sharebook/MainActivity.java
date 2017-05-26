@@ -30,4 +30,3 @@ public class MainActivity extends UILayoutActivity {
         //moveTaskToBack();
     }
 }
- 
