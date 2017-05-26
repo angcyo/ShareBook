@@ -1,6 +1,8 @@
 package com.angcyo.sharebook.iview;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 
 import com.angcyo.sharebook.R;
@@ -46,15 +48,17 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
             protected void onBindHeaderView(RBaseViewHolder holder, int posInHeader, BookSpaceUIView.HBean headerBean) {
                 holder.tv(R.id.text_view).setText(headerBean.type);
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
-                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+                recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, headerBean.mBeanList));
+
+                new PagerSnapHelper().attachToRecyclerView(recyclerView);
             }
 
             @Override
             protected void onBindDataView(RBaseViewHolder holder, int posInData, BookSpaceUIView.DBean dataBean) {
                 holder.tv(R.id.text_view).setText(dataBean.type);
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
-                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, dataBean.mBeanList));
             }
 
@@ -62,7 +66,7 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
             protected void onBindFooterView(RBaseViewHolder holder, int posInFooter, BookSpaceUIView.FBean footerBean) {
                 holder.tv(R.id.text_view).setText(footerBean.type);
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
-                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, footerBean.mBeanList));
             }
         };
