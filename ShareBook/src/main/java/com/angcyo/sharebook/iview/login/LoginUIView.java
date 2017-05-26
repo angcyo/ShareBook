@@ -81,7 +81,7 @@ public class LoginUIView extends BaseItemUIView {
     }
 
     private void login(String uid, String pwd) {
-        UILoading.show2(mOtherILayout);
+        UILoading.show2(mParentILayout);
         add(RRetrofit.create(User.class)
                 .login(P.b(Action.LOGIN, "uid:" + uid, "pwd:" + pwd))
                 .compose(RxBook.transformer(TokenBean.class))

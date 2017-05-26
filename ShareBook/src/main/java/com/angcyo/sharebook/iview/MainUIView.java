@@ -50,10 +50,10 @@ public class MainUIView extends UIIViewImpl {
         mMyOrderUIView = new MyOrderUIView();
         mMineUIView = new MineUIView();
 
-        mBookSpaceUIView.bindOtherILayout(getILayout());
-        mGoodSpaceUIView.bindOtherILayout(getILayout());
-        mMyOrderUIView.bindOtherILayout(getILayout());
-        mMineUIView.bindOtherILayout(getILayout());
+        mBookSpaceUIView.bindParentILayout(getILayout());
+        mGoodSpaceUIView.bindParentILayout(getILayout());
+        mMyOrderUIView.bindParentILayout(getILayout());
+        mMineUIView.bindParentILayout(getILayout());
     }
 
     @Override

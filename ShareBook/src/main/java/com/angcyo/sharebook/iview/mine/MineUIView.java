@@ -45,7 +45,7 @@ public class MineUIView extends BaseItemUIView {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOtherILayout.startIView(new LoginUIView().setEnableClipMode(ClipMode.CLIP_BOTH, v));
+                        mParentILayout.startIView(new LoginUIView().setEnableClipMode(ClipMode.CLIP_BOTH, v));
                     }
                 });
             }

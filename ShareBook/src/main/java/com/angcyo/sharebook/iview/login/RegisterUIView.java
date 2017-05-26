@@ -84,7 +84,7 @@ public class RegisterUIView extends BaseItemUIView {
     }
 
     private void register(String uid, String pwd) {
-        UILoading.show2(mOtherILayout);
+        UILoading.show2(mParentILayout);
         add(RRetrofit.create(User.class)
                 .register(P.b(Action.REGISTER, "uid:" + uid, "pwd:" + pwd))
                 .compose(RxBook.transformer(TokenBean.class))
