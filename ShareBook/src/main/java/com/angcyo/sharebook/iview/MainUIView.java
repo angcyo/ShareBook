@@ -1,11 +1,10 @@
 package com.angcyo.sharebook.iview;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.iview.base.BaseContentUIView;
 import com.angcyo.sharebook.iview.mine.MineUIView;
 import com.angcyo.uiview.container.UILayoutImpl;
 import com.angcyo.uiview.container.UIParam;
@@ -14,7 +13,7 @@ import com.angcyo.uiview.github.tablayout.TabEntity;
 import com.angcyo.uiview.github.tablayout.TabLayoutUtil;
 import com.angcyo.uiview.github.tablayout.listener.CustomTabEntity;
 import com.angcyo.uiview.github.tablayout.listener.OnTabSelectListener;
-import com.angcyo.uiview.view.UIIViewImpl;
+import com.angcyo.uiview.model.TitleBarPattern;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ import java.util.ArrayList;
  * Created by angcyo on 2017-03-12.
  */
 
-public class MainUIView extends UIIViewImpl {
+public class MainUIView extends BaseContentUIView {
 
     UILayoutImpl mMainUILayout;
     CommonTabLayout mCommonTabLayout;
@@ -33,14 +32,18 @@ public class MainUIView extends UIIViewImpl {
     private MineUIView mMineUIView;
 
     @Override
-    protected View inflateBaseView(FrameLayout container, LayoutInflater inflater) {
-        container.setBackgroundColor(Color.WHITE);
-        return inflater.inflate(R.layout.view_main, container);
+    protected TitleBarPattern getTitleBar() {
+        return null;
     }
 
     @Override
-    public void onViewCreate(View rootView) {
-        super.onViewCreate(rootView);
+    protected void inflateContentLayout(RelativeLayout baseContentLayout, LayoutInflater inflater) {
+        inflate(R.layout.view_main);
+    }
+
+    @Override
+    protected void initOnShowContentLayout() {
+        super.initOnShowContentLayout();
         mMainUILayout = mViewHolder.v(R.id.main_layout_imp);
         mCommonTabLayout = mViewHolder.v(R.id.bottom_navigation_layout);
 
