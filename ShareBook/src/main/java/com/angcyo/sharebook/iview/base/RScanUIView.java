@@ -290,6 +290,10 @@ public class RScanUIView extends UIContentView implements SurfaceHolder.Callback
      * 重新扫描
      */
     protected void scanAgain() {
+        if (handler == null ||
+                getIViewShowState() != IViewShowState.STATE_VIEW_SHOW) {
+            return;
+        }
         Message message = Message.obtain(handler, IDecodeCallback.decode_failed);
         handler.sendMessage(message);
     }

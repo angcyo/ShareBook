@@ -37,7 +37,9 @@ class SBScanUIView(onScanResult: Action1<String>) : RScanUIView(onScanResult) {
     }
 
     override fun onHandleDecode(msg: String?) {
-        scanAgain()
+        postDelayed({
+            scanAgain()
+        }, 1000)
 
         if (msg == null || msg.isEmpty()) {
             return

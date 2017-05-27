@@ -4,6 +4,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.adapter.BookAdapter;
@@ -110,9 +111,18 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                     }
 
                     @Override
-                    public void onEnd() {
-                        super.onEnd();
-                        onUILoadFinish();
+                    public void onEnd(boolean isError, boolean isNetwork, Throwable e) {
+                        super.onEnd(isError, isNetwork, e);
+                        if (isNetwork) {
+                            showNonetLayout(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    loadData();
+                                }
+                            });
+                        } else {
+                            onUILoadFinish();
+                        }
                     }
                 }));
     }

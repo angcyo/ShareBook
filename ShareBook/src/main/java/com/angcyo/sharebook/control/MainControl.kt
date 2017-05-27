@@ -23,7 +23,7 @@ object MainControl {
         LoginControl.autoLogin()
 
         if (BuildConfig.DEBUG) {
-            onDebug()
+            //onDebug()
         }
     }
 

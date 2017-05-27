@@ -69,13 +69,13 @@ public class GoodSpaceUIView extends UIRecyclerUIView {
     @Override
     public void onViewShowFirst(Bundle bundle) {
         super.onViewShowFirst(bundle);
-        mExBaseAdapter.resetAllData(createAllDatas());
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mExBaseAdapter.setShowState(IShowState.EMPTY);
-            }
-        }, 1000);
+//        mExBaseAdapter.resetAllData(createAllDatas());
+//        postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mExBaseAdapter.setShowState(IShowState.EMPTY);
+//            }
+//        }, 1000);
     }
 
     private List<MainItemBean> createAllDatas() {
