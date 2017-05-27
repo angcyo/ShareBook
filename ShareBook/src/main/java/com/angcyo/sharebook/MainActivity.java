@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 
 import com.angcyo.sharebook.iview.start.WelcomeUIView;
+import com.angcyo.uiview.RCrashHandler;
 import com.angcyo.uiview.base.UILayoutActivity;
 
 public class MainActivity extends UILayoutActivity {
@@ -14,6 +15,10 @@ public class MainActivity extends UILayoutActivity {
         mLayout.getLayout().setBackgroundColor(Color.WHITE);
 
         startIView(new WelcomeUIView(), false);
+
+        if (BuildConfig.SHOW_DEBUG) {
+            RCrashHandler.checkCrash(mLayout);
+        }
     }
 
     @Override

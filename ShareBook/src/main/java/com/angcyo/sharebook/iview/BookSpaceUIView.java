@@ -51,8 +51,8 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                 recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                 recyclerView.setAdapter(new BookAdapter<>(mActivity, headerBean.mBeanList));
 
+                recyclerView.setOnFlingListener(null);
                 new PagerSnapHelper().attachToRecyclerView(recyclerView);
-
                 recyclerView.setEnableAutoScroll(true);
             }
 
@@ -98,7 +98,7 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                     @Override
                     public void onSucceed(HomeBean bean) {
                         if (bean != null) {
-                            onUILoadFinish();
+                            showContentLayout();
 
                             mExBaseAdapter.setHeaderData(new HBean(bean.getLatern()));
                             mExBaseAdapter.setDataData(new DBean(bean.getTopical()));
@@ -107,6 +107,12 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                             HomeBean.BASE_IMG_PATH = bean.getPath();
                             mExBaseAdapter.notifyDataSetChanged();
                         }
+                    }
+
+                    @Override
+                    public void onEnd() {
+                        super.onEnd();
+                        onUILoadFinish();
                     }
                 }));
     }

@@ -26,7 +26,7 @@ public class BookAdapter<T extends BookAdapter.IBook> extends RBaseAdapter<T> {
     @Override
     protected void onBindView(RBaseViewHolder holder, int position, T bean) {
         holder.tv(R.id.text_view).setText(bean.getBookTitle());
-        GlideImageLoader.displayImage(holder.imgV(R.id.image_view), bean.getBookPic());
+        GlideImageLoader.displayImage(holder.imgV(R.id.image_view), bean.getBookPic(), R.drawable.default_image);
     }
 
     public interface IBook {
