@@ -4,12 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 
-<<<<<<< HEAD
 import com.angcyo.sharebook.iview.start.WelcomeUIView;
 import com.angcyo.uiview.RCrashHandler;
-=======
-import com.angcyo.sharebook.iview.MainUIView;
->>>>>>> rebase
 import com.angcyo.uiview.base.UILayoutActivity;
 
 public class MainActivity extends UILayoutActivity {
@@ -18,15 +14,11 @@ public class MainActivity extends UILayoutActivity {
         //startIView(new MainUIView(), false);
         mLayout.getLayout().setBackgroundColor(Color.WHITE);
 
-<<<<<<< HEAD
         startIView(new WelcomeUIView(), false);
 
         if (BuildConfig.SHOW_DEBUG) {
             RCrashHandler.checkCrash(mLayout);
         }
-=======
-        startIView(new MainUIView(), false);
->>>>>>> rebase
     }
 
     @Override
