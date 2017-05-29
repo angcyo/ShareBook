@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/base_bg_selector"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/base_xhdpi">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.angcyo.uiview.widget.RImageView
+            android:id="@+id/image_view"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_book_cover"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/image_view"
+            android:orientation="vertical"
+            android:padding="@dimen/base_ldpi">
+
+            <com.angcyo.uiview.widget.RTextView
+                android:id="@+id/title_view"
+                style="@style/BaseMainTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BookName"/>
+
+            <com.angcyo.uiview.widget.RTextView
+                android:id="@+id/author_view"
+                style="@style/BaseDarkTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="作者: %1$s"
+                android:text="BookName"
+                android:textSize="12sp"/>
+
+            <com.angcyo.uiview.widget.RExTextView
+                android:id="@+id/summary_view"
+                style="@style/BaseDarkTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_ldpi"
+                android:text="BookName"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_line"
+        android:background="@color/base_chat_bg_color"/>
+
+</LinearLayout>

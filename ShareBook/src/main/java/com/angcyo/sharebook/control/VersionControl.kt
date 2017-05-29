@@ -14,7 +14,12 @@ import com.angcyo.uiview.net.RRetrofit
  * Created by angcyo on 2017-05-29.
  */
 object VersionControl {
+    var isChecking = false
     fun check(layout: ILayout<*>) {
+        if (isChecking) {
+            return
+        }
+        isChecking = true
         RRetrofit.create(Version::class.java)
                 .version(Version.url)
                 .compose(RxBook.transformer(VersionBean::class.java))
@@ -26,6 +31,11 @@ object VersionControl {
                         }) {
                             showNoUpdateDialog(layout)
                         }
+                    }
+
+                    override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
+                        super.onEnd(isError, isNoNetwork, e)
+                        isChecking = false
                     }
                 })
     }

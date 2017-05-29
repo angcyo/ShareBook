@@ -19,6 +19,6 @@ import rx.Observable;
  * Version: 1.0.0
  */
 public interface Home {
-    @POST("home.php")
+    @POST("activity.php")
     Observable<ResponseBody> home(@QueryMap Map<String, String> map);
 }

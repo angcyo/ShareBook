@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.adapter.BookAdapter;
+import com.angcyo.sharebook.adapter.BookListAdapter;
+import com.angcyo.sharebook.http.Action;
 import com.angcyo.sharebook.http.BSub;
 import com.angcyo.sharebook.http.P;
 import com.angcyo.sharebook.http.RxBook;
@@ -22,6 +24,7 @@ import com.angcyo.uiview.recycler.RRecyclerView;
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter;
 import com.angcyo.uiview.recycler.widget.IShowState;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -69,11 +72,16 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
 
             @Override
             protected void onBindFooterView(RBaseViewHolder holder, int posInFooter, BookSpaceUIView.FBean footerBean) {
-                holder.tv(R.id.text_view).setText(footerBean.type);
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
-                recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
-                recyclerView.setAdapter(new BookAdapter<>(mActivity, footerBean.mBeanList));
-
+                if (posInFooter == 0) {
+                    holder.tv(R.id.text_view).setText(footerBean.type);
+                    recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+                    recyclerView.setAdapter(new BookAdapter<>(mActivity, footerBean.mBeanList));
+                } else {
+                    holder.tv(R.id.text_view).setText(footerBean.type2);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setAdapter(new BookListAdapter(mActivity, footerBean.mBeanList2));
+                }
                 recyclerView.setEnableAutoScroll(false);
             }
         };
@@ -93,7 +101,7 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
     @Override
     protected void onUILoadData() {
         add(RRetrofit.create(Home.class)
-                .home(P.b())
+                .home(P.b(Action.HOME))
                 .compose(RxBook.transformer(HomeBean.class))
                 .subscribe(new BSub<HomeBean>() {
                     @Override
@@ -103,7 +111,11 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
 
                             mExBaseAdapter.setHeaderData(new HBean(bean.getLatern()));
                             mExBaseAdapter.setDataData(new DBean(bean.getTopical()));
-                            mExBaseAdapter.setFooterData(new FBean(bean.getSpecial()));
+
+                            List<FBean> fBeanList = new ArrayList<>();
+                            fBeanList.add(new FBean(bean.getSpecial()));
+                            fBeanList.add(new FBean().setBeanList2(bean.getRecommand()));
+                            mExBaseAdapter.setAllFooterDatas(fBeanList);
 
                             HomeBean.BASE_IMG_PATH = bean.getPath();
                             mExBaseAdapter.notifyDataSetChanged();
@@ -199,8 +211,19 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
         public String type = "Special";
         public List<HomeBean.SpecialBean> mBeanList;
 
+        public String type2 = "Recommand";
+        public List<HomeBean.RecommandBean> mBeanList2;
+
+        public FBean() {
+        }
+
         public FBean(List<HomeBean.SpecialBean> beanList) {
             mBeanList = beanList;
+        }
+
+        public FBean setBeanList2(List<HomeBean.RecommandBean> beanList2) {
+            mBeanList2 = beanList2;
+            return this;
         }
     }
 }
