@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.control.LoginControl;
+import com.angcyo.sharebook.control.VersionControl;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
 import com.angcyo.sharebook.iview.login.LoginUIView;
 import com.angcyo.uiview.base.Item;
@@ -93,7 +94,13 @@ public class MineUIView extends BaseItemUIView {
             @Override
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
                 ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
-                itemLayout.setItemText("测试条目:" + posInData);
+                itemLayout.setItemText("版本检查:" + posInData);
+                itemLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        VersionControl.INSTANCE.check(mParentILayout);
+                    }
+                });
             }
         });
         items.add(new SingleItem(SingleItem.Type.TOP) {
