@@ -1,4 +1,5 @@
 include ':ShareBook'
 include ':RLibrary:uiview', ':RLibrary:library'
 include ':RLibrary:imagepicker'
+include ':RLibrary:filedownloader'
 include ':RLibrary:rcode'

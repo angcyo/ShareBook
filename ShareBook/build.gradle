@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+def package_name = "com.angcyo.easybook"
+
 android {
 
     signingConfigs {
@@ -18,10 +20,14 @@ android {
     defaultConfig {
         minSdkVersion rootProject.M_SDK as int
         targetSdkVersion rootProject.T_SDK as int
-        applicationId "com.angcyo.easybook"
+        applicationId package_name
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+
+        manifestPlaceholders = [
+                PACKAGE_NAME: package_name,
+        ]
     }
 
     productFlavors {
@@ -83,6 +89,7 @@ dependencies {
     compile project(':RLibrary:uiview')
     compile project(':RLibrary:rcode')
     compile project(':RLibrary:imagepicker')
+    compile project(':RLibrary:filedownloader')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

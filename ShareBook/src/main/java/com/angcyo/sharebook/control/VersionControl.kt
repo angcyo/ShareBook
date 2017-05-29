@@ -1,6 +1,5 @@
 package com.angcyo.sharebook.control
 
-import com.angcyo.library.utils.L
 import com.angcyo.sharebook.App
 import com.angcyo.sharebook.http.BSub
 import com.angcyo.sharebook.http.RxBook
@@ -32,17 +31,7 @@ object VersionControl {
     }
 
     fun showUpdateDialog(layout: ILayout<*>, version: VersionBean) {
-        UIDialog.build()
-                .setDialogTitle("发现新版:${version.version_name}")
-                .setDialogContent("${version.des}")
-                .setOkText("下载安装")
-                .setOkClick { dialog, _ ->
-                    run {
-                        dialog.setAutoFinishDialog(false)
-                        L.e("...")
-                    }
-                }
-                .showDialog(layout)
+        UpdateHelper.showUpdateDialog(layout, version.version_name, version.des, version.url, version.force ?: false)
     }
 
     fun showNoUpdateDialog(layout: ILayout<*>) {

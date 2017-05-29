@@ -7,6 +7,7 @@ import com.angcyo.uiview.RApplication;
 import com.angcyo.uiview.Root;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.skin.SkinHelper;
+import com.liulishuo.FDown;
 
 /**
  * Created by angcyo on 2017-03-11.
@@ -26,5 +27,7 @@ public class App extends RApplication {
         RRetrofit.BASE_URL = "http://119.23.221.242/api/";
 
         RxBook.OK_CODE = 0;
+
+        FDown.init(this, false);
     }
 }
