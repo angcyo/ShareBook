@@ -19,12 +19,15 @@ public class MainActivity extends UILayoutActivity {
         if (BuildConfig.SHOW_DEBUG) {
             RCrashHandler.checkCrash(mLayout);
         }
+
+        checkPermissions();
     }
 
     @Override
     protected String[] needPermissions() {
         return new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
         };
     }
