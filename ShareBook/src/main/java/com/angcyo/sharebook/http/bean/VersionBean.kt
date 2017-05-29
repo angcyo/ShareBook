@@ -12,14 +12,14 @@ import com.angcyo.uiview.github.utilcode.utils.AppUtils
 }
 */
 data class VersionBean(
-        val versionName: String? = null,
+        val version_name: String? = null,
         val des: String? = null,
-        val versionCode: String? = null,
+        val version_code: String? = null,
         val force: Boolean? = null,
         val url: String? = null
 ) {
     fun haveUpdate(update: () -> Unit, noUpdate: () -> Unit) {
-        val toInt = versionCode?.toInt()
+        val toInt = version_code?.toInt()
         if (toInt == null) {
             noUpdate.invoke()
         } else {

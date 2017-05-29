@@ -33,7 +33,7 @@ object VersionControl {
 
     fun showUpdateDialog(layout: ILayout<*>, version: VersionBean) {
         UIDialog.build()
-                .setDialogTitle("发现新版:${version.versionName}")
+                .setDialogTitle("发现新版:${version.version_name}")
                 .setDialogContent("${version.des}")
                 .setOkText("下载安装")
                 .setOkClick { dialog, _ ->

@@ -4,8 +4,7 @@
     "data":{
                "version_name":"1.0.100",
                "version_code":"100",
-               "des":"1:1\n2:2
-               3:3\n",
+               "des":"1:1\n2:2\n3:3\n",
                "url":"https://raw.githubusercontent.com/angcyo/ShareBook/master/app.apk",
                "force":false
            }
