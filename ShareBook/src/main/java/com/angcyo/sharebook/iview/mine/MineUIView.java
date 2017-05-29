@@ -94,7 +94,7 @@ public class MineUIView extends BaseItemUIView {
             @Override
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
                 ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
-                itemLayout.setItemText("版本检查:" + posInData);
+                itemLayout.setItemText("版本检查");
                 itemLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
