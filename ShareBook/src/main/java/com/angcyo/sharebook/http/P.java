@@ -4,6 +4,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.angcyo.sharebook.App;
+import com.angcyo.sharebook.control.LoginControl;
 import com.angcyo.uiview.RApplication;
 import com.angcyo.uiview.net.rsa.RSA;
 import com.angcyo.uiview.utils.RUtils;
@@ -148,7 +149,8 @@ public class P {
     public static Map<String, String> build(boolean uid, String... args) {
         final Map<String, String> map = new HashMap<>();
         if (uid) {
-            //map.put("uid", UserCache.getUserAccount());//默认传输uid参数
+            map.put("uid", LoginControl.INSTANCE.getUid());//默认传输uid参数
+            map.put("token", LoginControl.INSTANCE.getToken());
             //map.put("limit", Constant.DEFAULT_PAGE_DATA_COUNT + "");
         }
         foreach(new OnPutValue() {

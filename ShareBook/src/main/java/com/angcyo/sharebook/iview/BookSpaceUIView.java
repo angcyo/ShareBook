@@ -1,9 +1,12 @@
 package com.angcyo.sharebook.iview;
 
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextPaint;
 import android.view.View;
 
 import com.angcyo.sharebook.R;
@@ -20,6 +23,7 @@ import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.net.Rx;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
+import com.angcyo.uiview.recycler.RExItemDecoration;
 import com.angcyo.uiview.recycler.RRecyclerView;
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter;
 import com.angcyo.uiview.recycler.widget.IShowState;
@@ -38,6 +42,21 @@ import rx.functions.Func1;
 public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
         BookSpaceUIView.DBean,
         BookSpaceUIView.FBean> {
+
+    RecyclerView.ItemDecoration mBookListItemDecoration = new RExItemDecoration(new RExItemDecoration.SingleItemCallback() {
+        @Override
+        public void getItemOffsets2(Rect outRect, int position, int edge) {
+            super.getItemOffsets2(outRect, position, edge);
+            outRect.bottom = getDimensionPixelOffset(R.dimen.base_xhdpi);
+        }
+
+        @Override
+        public void draw(Canvas canvas, TextPaint paint, View itemView, Rect offsetRect, int itemCount, int position) {
+            super.draw(canvas, paint, itemView, offsetRect, itemCount, position);
+            drawBottomLine(canvas, paint, itemView, offsetRect, itemCount, position);
+        }
+    });
+
     @Override
     protected RExBaseAdapter createAdapter() {
         return new RExBaseAdapter<BookSpaceUIView.HBean,
@@ -81,6 +100,9 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                     holder.tv(R.id.text_view).setText(footerBean.type2);
                     recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
                     recyclerView.setAdapter(new BookListAdapter(mActivity, footerBean.mBeanList2));
+                    recyclerView.setBackgroundColor(getColor(R.color.base_chat_bg_color));
+                    recyclerView.removeItemDecoration(mBookListItemDecoration);
+                    recyclerView.addItemDecoration(mBookListItemDecoration);
                 }
                 recyclerView.setEnableAutoScroll(false);
             }
