@@ -13,7 +13,7 @@
         android:id="@+id/image_view"
         android:layout_width="@dimen/base_50dpi"
         android:layout_height="@dimen/base_50dpi"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/default_avatar"/>
 
     <com.angcyo.uiview.widget.RTextView
         android:id="@+id/text_view"

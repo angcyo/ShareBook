@@ -87,11 +87,12 @@ public class MainUIView extends BaseContentUIView {
     public void onViewLoad() {
         super.onViewLoad();
         ArrayList<CustomTabEntity> entities = new ArrayList<>();
-        entities.add(new TabEntity("书库", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
-        entities.add(new TabEntity("推荐", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
-        entities.add(new TabEntity("订单", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
-        entities.add(new TabEntity("我的", R.mipmap.ic_launcher_round, R.mipmap.ic_launcher));
+        entities.add(new TabEntity("书库", R.drawable.book_stack_48_color, R.drawable.book_stack_48));
+        entities.add(new TabEntity("推荐", R.drawable.book_recommend_48_color, R.drawable.book_recommend_48));
+        entities.add(new TabEntity("订单", R.drawable.book_order_48_color, R.drawable.book_order_48));
+        entities.add(new TabEntity("我的", R.drawable.book_mine_48_color, R.drawable.book_mine_48));
 
+        mCommonTabLayout.setTextsize(10);
         TabLayoutUtil.initCommonTab(mCommonTabLayout, entities, new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
