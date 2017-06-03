@@ -16,6 +16,7 @@ import com.angcyo.uiview.model.TitleBarPattern
 import com.angcyo.uiview.net.RRetrofit
 import com.angcyo.uiview.recycler.RBaseViewHolder
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter
+import com.angcyo.uiview.utils.T_
 import com.angcyo.uiview.widget.TagsTextView
 import com.lzy.imagepicker.GlideImageLoader
 
@@ -68,11 +69,25 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
         mViewHolder.click(R.id.borrow_book_view) {
 
         }
-        mViewHolder.click(R.id.try_book_view) {
+        mViewHolder.click(R.id.join_book_view) {
 
         }
         mViewHolder.click(R.id.fav_book_view) {
+            showLoadView()
+            add(RRetrofit.create(Book::class.java)
+                    .favBook(P.b(Action.FAV_BOOK, "isbn:" + isbn))
+                    .compose(RxBook.transformer(String::class.java))
+                    .subscribe(object : BSub<String>() {
+                        override fun onSucceed(bean: String) {
+                            super.onSucceed(bean)
+                            T_.ok(bean)
+                        }
 
+                        override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
+                            super.onEnd(isError, isNoNetwork, e)
+                            hideLoadView()
+                        }
+                    }))
         }
     }
 
@@ -86,6 +101,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
     }
 
     override fun onUILoadData() {
+        super.onUILoadData()
         add(RRetrofit.create(Book::class.java)
                 .searchBook(P.b(Action.SEARCH_BOOK, "isbn:" + isbn))
                 .compose(RxBook.transformerList(BookDetailBean::class.java))

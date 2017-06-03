@@ -24,4 +24,10 @@ public interface Book {
 
     @POST("activity.php")
     Observable<ResponseBody> searchBook(@QueryMap Map<String, String> map);
+
+    @POST("activity.php")
+    Observable<ResponseBody> favBook(@QueryMap Map<String, String> map);
+
+    @POST("activity.php")
+    Observable<ResponseBody> getALlFavBook(@QueryMap Map<String, String> map);
 }

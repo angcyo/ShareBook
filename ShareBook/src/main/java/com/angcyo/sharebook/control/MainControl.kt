@@ -1,5 +1,6 @@
 package com.angcyo.sharebook.control
 
+import com.angcyo.library.utils.L
 import com.angcyo.sharebook.BuildConfig
 import com.angcyo.sharebook.http.BSub
 import com.angcyo.sharebook.http.P
@@ -23,6 +24,7 @@ object MainControl {
         LoginControl.autoLogin()
 
         if (BuildConfig.DEBUG) {
+            //L.e("------------------------Debug...........................")
             //onDebug()
         }
     }

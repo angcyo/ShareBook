@@ -128,6 +128,7 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
 
     @Override
     protected void onUILoadData() {
+        super.onUILoadData();
         add(RRetrofit.create(Home.class)
                 .home(P.b(Action.HOME))
                 .compose(RxBook.transformer(HomeBean.class))

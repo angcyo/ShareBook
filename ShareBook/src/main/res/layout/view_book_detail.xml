@@ -37,7 +37,7 @@
             android:textColor="@color/base_white"/>
 
         <TextView
-            android:id="@+id/try_book_view"
+            android:id="@+id/join_book_view"
             style="@style/BaseMainTextStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/base_60dpi"
@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:background="@drawable/base_orange_color_bg_selector"
             android:gravity="center"
-            android:text="试读"
+            android:text="加入书包"
             android:textColor="@color/base_white"/>
 
         <TextView

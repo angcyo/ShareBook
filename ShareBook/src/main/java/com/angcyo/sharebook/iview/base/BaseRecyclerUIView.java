@@ -45,7 +45,6 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
     }
 
     public void loadData() {
-        showLoadView();
         onUILoadData();
     }
 
@@ -84,7 +83,7 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
     }
 
     protected void onUILoadData() {
-
+        showLoadView();
     }
 
     /**

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.control.FavControl;
 import com.angcyo.sharebook.control.LoginControl;
 import com.angcyo.sharebook.control.VersionControl;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
@@ -111,6 +112,13 @@ public class MineUIView extends BaseItemUIView {
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
                 ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
                 itemLayout.setItemText("测试条目:" + posInData);
+
+                itemLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FavControl.INSTANCE.initFavList();
+                    }
+                });
             }
         });
         items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
