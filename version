@@ -2,9 +2,9 @@
     "code":0,
     "msg":"yes",
     "data":{
-               "version_name":"1.0.0",
-               "version_code":"1",
-               "des":"1:1\n2:2\n3:3\n",
+               "version_name":"1.0.1",
+               "version_code":"2",
+               "des":"1:添加详情\n2:修复少量BUG\n3:and so on.\n",
                "url":"https://raw.githubusercontent.com/angcyo/ShareBook/master/app.apk",
                "force":false
            }
