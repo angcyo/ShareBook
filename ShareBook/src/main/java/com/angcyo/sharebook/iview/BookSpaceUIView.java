@@ -19,6 +19,7 @@ import com.angcyo.sharebook.http.RxBook;
 import com.angcyo.sharebook.http.bean.HomeBean;
 import com.angcyo.sharebook.http.service.Home;
 import com.angcyo.sharebook.iview.base.BaseRecyclerUIView;
+import com.angcyo.sharebook.iview.book.BookDetailUIView;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.net.Rx;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
@@ -99,7 +100,12 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                 } else {
                     holder.tv(R.id.text_view).setText(footerBean.type2);
                     recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-                    recyclerView.setAdapter(new BookListAdapter(mActivity, footerBean.mBeanList2));
+                    recyclerView.setAdapter(new BookListAdapter(mActivity, footerBean.mBeanList2).setBookItemClick(new BookListAdapter.OnBookItemClick() {
+                        @Override
+                        public void onBookItemClick(String isbn) {
+                            mParentILayout.startIView(new BookDetailUIView(isbn));
+                        }
+                    }));
                     recyclerView.setBackgroundColor(getColor(R.color.base_chat_bg_color));
                     recyclerView.removeItemDecoration(mBookListItemDecoration);
                     recyclerView.addItemDecoration(mBookListItemDecoration);

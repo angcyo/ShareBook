@@ -4,13 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.angcyo.sharebook.R;
-import com.angcyo.sharebook.http.Action;
-import com.angcyo.sharebook.http.BSub;
-import com.angcyo.sharebook.http.P;
-import com.angcyo.sharebook.http.RxBook;
 import com.angcyo.sharebook.http.bean.HomeBean;
-import com.angcyo.sharebook.http.service.Book;
-import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
 import com.angcyo.uiview.recycler.adapter.RBaseAdapter;
 import com.angcyo.uiview.widget.RExTextView;
@@ -23,6 +17,8 @@ import java.util.List;
  */
 
 public class BookListAdapter extends RBaseAdapter<HomeBean.RecommandBean> {
+    OnBookItemClick mBookItemClick;
+
     public BookListAdapter(Context context, List<HomeBean.RecommandBean> datas) {
         super(context, datas);
     }
@@ -45,16 +41,19 @@ public class BookListAdapter extends RBaseAdapter<HomeBean.RecommandBean> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RRetrofit.create(Book.class)
-                        .searchBook(P.b(Action.SEARCH_BOOK, "isbn:" + bean.getIsbn()))
-                        .compose(RxBook.transformer(String.class))
-                        .subscribe(new BSub<String>() {
-                            @Override
-                            public void onSucceed(String bean) {
-                                super.onSucceed(bean);
-                            }
-                        });
+                if (mBookItemClick != null) {
+                    mBookItemClick.onBookItemClick(bean.getIsbn());
+                }
             }
         });
+    }
+
+    public BookListAdapter setBookItemClick(OnBookItemClick bookItemClick) {
+        mBookItemClick = bookItemClick;
+        return this;
+    }
+
+    public interface OnBookItemClick {
+        void onBookItemClick(String isbn);
     }
 }

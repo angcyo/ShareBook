@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <com.angcyo.uiview.rsen.RefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/base_50dpi">
+
+        <com.angcyo.uiview.recycler.RRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.angcyo.uiview.rsen.RefreshLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_50dpi"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/borrow_book_view"
+            style="@style/BaseMainTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/base_red_color_bg_selector"
+            android:gravity="center"
+            android:text="借读"
+            android:textColor="@color/base_white"/>
+
+        <TextView
+            android:id="@+id/try_book_view"
+            style="@style/BaseMainTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base_60dpi"
+            android:layout_marginTop="-10dp"
+            android:layout_weight="1"
+            android:background="@drawable/base_orange_color_bg_selector"
+            android:gravity="center"
+            android:text="试读"
+            android:textColor="@color/base_white"/>
+
+        <TextView
+            android:id="@+id/fav_book_view"
+            style="@style/BaseMainTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/base_red_color_bg_selector"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="@color/base_white"/>
+
+    </LinearLayout>
+</RelativeLayout>

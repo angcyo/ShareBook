@@ -104,6 +104,9 @@ public class HomeBean {
 
         @Override
         public String getBookPic() {
+            if (getPic().startsWith("http")) {
+                return getPic();
+            }
             return BASE_IMG_PATH + getPic();
         }
     }
@@ -140,6 +143,9 @@ public class HomeBean {
 
         @Override
         public String getBookPic() {
+            if (getPic().startsWith("http")) {
+                return getPic();
+            }
             return BASE_IMG_PATH + getPic();
         }
     }
@@ -186,6 +192,9 @@ public class HomeBean {
 
         @Override
         public String getBookPic() {
+            if (getPic().startsWith("http")) {
+                return getPic();
+            }
             return BASE_IMG_PATH + getPic();
         }
     }
@@ -377,6 +386,9 @@ public class HomeBean {
         }
 
         public String getBookPic() {
+            if (getPic().startsWith("http")) {
+                return getPic();
+            }
             return BASE_IMG_PATH + getPic();
         }
     }

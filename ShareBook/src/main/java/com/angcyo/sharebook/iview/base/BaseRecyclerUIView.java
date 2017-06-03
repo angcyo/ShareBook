@@ -3,6 +3,7 @@ package com.angcyo.sharebook.iview.base;
 import android.os.Bundle;
 
 import com.angcyo.uiview.base.UIRecyclerUIView;
+import com.angcyo.uiview.model.TitleBarPattern;
 import com.angcyo.uiview.widget.viewpager.UIViewPager;
 
 /**
@@ -25,6 +26,17 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
     }
 
     @Override
+    protected TitleBarPattern getTitleBar() {
+        if (isShowInViewPager()) {
+            return null;
+        }
+        if (!haveOtherILayout()) {
+            return super.getTitleBar().setShowBackImageView(true);
+        }
+        return super.getTitleBar();
+    }
+
+    @Override
     public void onViewShowFirst(Bundle bundle) {
         super.onViewShowFirst(bundle);
         if (!isShowInViewPager()) {
@@ -33,6 +45,7 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
     }
 
     public void loadData() {
+        showLoadView();
         onUILoadData();
     }
 
@@ -82,6 +95,7 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
     }
 
     protected void onUILoadFinish(boolean isEmpty) {
+        hideLoadView();
         if (isEmpty) {
             showEmptyLayout();
         } else {

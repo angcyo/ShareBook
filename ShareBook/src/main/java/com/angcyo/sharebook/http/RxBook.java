@@ -104,17 +104,10 @@ public class RxBook {
                                     L.json(body);
 
                                     JSONObject jsonObject = new JSONObject(body);
-                                    int result = 0;
-                                    try {
-                                        result = jsonObject.getInt("result");
-                                    } catch (Exception e) {
-                                        ////兼容资讯API
-                                        result = jsonObject.getInt("code");
-                                        if (result == 200) {
-                                            result = 1;//资讯接口没有此字段
-                                        }
-                                    }
-                                    if (result == 1) {
+                                    int code = jsonObject.getInt("code");
+                                    String msg = jsonObject.getString("msg");
+
+                                    if (code == OK_CODE) {
                                         //请求成功
                                         String data = jsonObject.getString("data");
                                         if (!TextUtils.isEmpty(data)) {
@@ -123,11 +116,9 @@ public class RxBook {
                                         }
                                     } else {
                                         //请求成功, 但是有错误
-                                        JSONObject errorObject = jsonObject.getJSONObject("error");
-
-                                        throw new RException(errorObject.getInt("code"),
-                                                errorObject.getString("msg"),
-                                                errorObject.getString("more"));
+                                        throw new RException(code,
+                                                msg,
+                                                "no more");
                                     }
                                 } catch (JSONException | IOException e) {
                                     e.printStackTrace();

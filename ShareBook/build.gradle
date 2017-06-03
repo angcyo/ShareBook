@@ -21,8 +21,8 @@ android {
         minSdkVersion rootProject.M_SDK as int
         targetSdkVersion rootProject.T_SDK as int
         applicationId package_name
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         multiDexEnabled true
 
         manifestPlaceholders = [
@@ -91,8 +91,14 @@ dependencies {
     compile project(':RLibrary:imagepicker')
     compile project(':RLibrary:filedownloader')
 
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    compile 'jp.wasabeef:takt:1.0.4'
+
+    _devCompile 'com.github.markzhai:blockcanary-android:1.5.0'
+    preCompile 'com.github.markzhai:blockcanary-android:1.5.0'
+    apkCompile 'com.github.markzhai:blockcanary-no-op:1.5.0'
 }
 repositories {
     mavenCentral()
