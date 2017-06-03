@@ -15,7 +15,7 @@ import com.angcyo.uiview.net.RRetrofit
  */
 object VersionControl {
     var isChecking = false
-    fun check(layout: ILayout<*>) {
+    fun check(layout: ILayout<*>, inBack: Boolean = false) {
         if (isChecking) {
             return
         }
@@ -29,7 +29,9 @@ object VersionControl {
                         bean?.haveUpdate({
                             showUpdateDialog(layout, bean)
                         }) {
-                            showNoUpdateDialog(layout)
+                            if (!inBack) {
+                                showNoUpdateDialog(layout)
+                            }
                         }
                     }
 

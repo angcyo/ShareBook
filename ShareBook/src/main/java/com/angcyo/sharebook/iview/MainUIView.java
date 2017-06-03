@@ -1,11 +1,13 @@
 package com.angcyo.sharebook.iview;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.control.MainControl;
+import com.angcyo.sharebook.control.VersionControl;
 import com.angcyo.sharebook.iview.base.BaseContentUIView;
 import com.angcyo.sharebook.iview.mine.MineUIView;
 import com.angcyo.uiview.container.UILayoutImpl;
@@ -67,6 +69,12 @@ public class MainUIView extends BaseContentUIView {
     public void onViewCreate(View rootView, UIParam param) {
         super.onViewCreate(rootView, param);
         MainControl.INSTANCE.onMainLoad();
+    }
+
+    @Override
+    public void onViewShowFirst(Bundle bundle) {
+        super.onViewShowFirst(bundle);
+        VersionControl.INSTANCE.check(mParentILayout, true);
     }
 
     @Override

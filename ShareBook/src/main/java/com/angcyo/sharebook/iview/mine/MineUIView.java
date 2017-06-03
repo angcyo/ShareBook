@@ -98,7 +98,7 @@ public class MineUIView extends BaseItemUIView {
                 itemLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        VersionControl.INSTANCE.check(mParentILayout);
+                        VersionControl.INSTANCE.check(mParentILayout, false);
                     }
                 });
             }
