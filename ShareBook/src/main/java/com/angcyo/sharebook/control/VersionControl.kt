@@ -7,6 +7,7 @@ import com.angcyo.sharebook.http.bean.VersionBean
 import com.angcyo.sharebook.http.service.Version
 import com.angcyo.uiview.container.ILayout
 import com.angcyo.uiview.dialog.UIDialog
+import com.angcyo.uiview.dialog.UILoading
 import com.angcyo.uiview.github.utilcode.utils.AppUtils
 import com.angcyo.uiview.net.RRetrofit
 
@@ -38,6 +39,7 @@ object VersionControl {
                     override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
                         super.onEnd(isError, isNoNetwork, e)
                         isChecking = false
+                        UILoading.hide()
                     }
                 })
     }

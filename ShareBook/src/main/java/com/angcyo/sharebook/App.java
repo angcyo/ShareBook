@@ -7,6 +7,7 @@ import com.angcyo.uiview.RApplication;
 import com.angcyo.uiview.Root;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.skin.SkinHelper;
+import com.angcyo.umeng.UM;
 import com.github.moduth.blockcanary.BlockCanary;
 import com.hn.d.valley.AppBlockCanaryContext;
 import com.liulishuo.FDown;
@@ -42,5 +43,7 @@ public class App extends RApplication {
 
             BlockCanary.install(this, new AppBlockCanaryContext()).start();
         }
+
+        UM.init(this, BuildConfig.DEBUG);
     }
 }

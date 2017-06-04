@@ -7,6 +7,7 @@ import android.graphics.Color;
 import com.angcyo.sharebook.iview.start.WelcomeUIView;
 import com.angcyo.uiview.RCrashHandler;
 import com.angcyo.uiview.base.UILayoutActivity;
+import com.angcyo.umeng.UM;
 
 public class MainActivity extends UILayoutActivity {
     @Override
@@ -36,5 +37,11 @@ public class MainActivity extends UILayoutActivity {
     protected void onUIBackPressed() {
         super.onUIBackPressed();
         //moveTaskToBack();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UM.onActivityResult(requestCode, resultCode, data);
     }
 }
