@@ -73,7 +73,7 @@ public class RxBook {
                                     }
                                 } catch (JSONException | IOException e) {
                                     e.printStackTrace();
-                                    //throw new RException(-1000, "服务器数据异常.", e.getMessage());
+                                    throw new RException(-1000, "服务器数据异常.", e.getMessage());
                                 }
                                 //throw new NullPointerException("无数据.");
                                 return null;

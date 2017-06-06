@@ -3,7 +3,7 @@ package com.angcyo.sharebook.iview.start
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.angcyo.sharebook.R
-import com.angcyo.sharebook.iview.MainUIView
+import com.angcyo.sharebook.iview.MainNavUIView
 import com.angcyo.sharebook.iview.base.BaseContentUIView
 import com.angcyo.uiview.model.TitleBarPattern
 
@@ -29,7 +29,8 @@ class WelcomeUIView : BaseContentUIView() {
     override fun initOnShowContentLayout() {
         super.initOnShowContentLayout()
         postDelayed({
-            replaceIView(MainUIView().setEnableClipMode(ClipMode.CLIP_START))
+            //replaceIView(MainUIView().setEnableClipMode(ClipMode.CLIP_START))
+            replaceIView(MainNavUIView(), false)
         }, 1_000)
     }
 }

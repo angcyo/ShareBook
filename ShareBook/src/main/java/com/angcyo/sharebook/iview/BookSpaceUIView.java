@@ -154,7 +154,8 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                     @Override
                     public void onEnd(boolean isError, boolean isNetwork, Throwable e) {
                         super.onEnd(isError, isNetwork, e);
-                        if (isNetwork) {
+                        hideLoadView();
+                        if (isError) {
                             showNonetLayout(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
