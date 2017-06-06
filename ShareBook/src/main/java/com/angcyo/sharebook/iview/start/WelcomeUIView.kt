@@ -30,7 +30,7 @@ class WelcomeUIView : BaseContentUIView() {
         super.initOnShowContentLayout()
         postDelayed({
             //replaceIView(MainUIView().setEnableClipMode(ClipMode.CLIP_START))
-            replaceIView(MainNavUIView(), false)
+            replaceIView(MainNavUIView().setEnableClipMode(ClipMode.CLIP_START))
         }, 1_000)
     }
 }
