@@ -76,7 +76,7 @@ public class ShareUIDialog extends UIIDialogImpl {
     protected void share(SHARE_MEDIA shareMedia) {
         UM.shareWeb(mActivity,
                 shareMedia,
-                "https://raw.githubusercontent.com/angcyo/ShareBook/master/app.apk",
+                "http://git.oschina.net/angcyo/sharebook/raw/master/app.apk",
                 R.mipmap.ic_launcher,
                 "EasyBook",
                 "读书还可以领红包, 赶快下载安装来参与吧!",
