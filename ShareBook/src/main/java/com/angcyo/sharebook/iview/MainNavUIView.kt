@@ -1,8 +1,13 @@
 package com.angcyo.sharebook.iview
 
+import android.os.Bundle
+import android.view.View
 import com.angcyo.sharebook.R
+import com.angcyo.sharebook.control.MainControl
+import com.angcyo.sharebook.control.VersionControl
 import com.angcyo.sharebook.iview.mine.MineUIView
 import com.angcyo.uiview.base.UINavigationView
+import com.angcyo.uiview.container.UIParam
 import com.angcyo.uiview.skin.SkinHelper
 
 /**
@@ -17,20 +22,36 @@ import com.angcyo.uiview.skin.SkinHelper
  * Version: 1.0.0
  */
 class MainNavUIView : UINavigationView() {
+
+    override fun onViewCreate(rootView: View, param: UIParam) {
+        super.onViewCreate(rootView, param)
+        MainControl.onMainLoad()
+    }
+
+    override fun onViewShowFirst(bundle: Bundle?) {
+        super.onViewShowFirst(bundle)
+        VersionControl.check(mILayout, true)
+    }
+
+    override fun onViewUnload() {
+        super.onViewUnload()
+        MainControl.onMainUnload()
+    }
+
     override fun createPages(pages: ArrayList<PageBean>) {
-        pages.add(PageBean(BookSpaceUIView(), "书库",
+        pages.add(PageBean(BookSpaceUIView(), "", "书库",
                 getColor(R.color.base_text_color_dark), SkinHelper.getSkin().themeSubColor,
                 R.drawable.book_stack_48, R.drawable.book_stack_48_color))
 
-        pages.add(PageBean(GoodSpaceUIView(), "推荐",
+        pages.add(PageBean(GoodSpaceUIView(), "", "推荐",
                 getColor(R.color.base_text_color_dark), SkinHelper.getSkin().themeSubColor,
                 R.drawable.book_recommend_48, R.drawable.book_recommend_48_color))
 
-        pages.add(PageBean(MyOrderUIView(), "订单",
+        pages.add(PageBean(MyOrderUIView(), "", "订单",
                 getColor(R.color.base_text_color_dark), SkinHelper.getSkin().themeSubColor,
                 R.drawable.book_order_48, R.drawable.book_order_48_color))
 
-        pages.add(PageBean(MineUIView(), "我的",
+        pages.add(PageBean(MineUIView(), "", "我的",
                 getColor(R.color.base_text_color_dark), SkinHelper.getSkin().themeSubColor,
                 R.drawable.book_mine_48, R.drawable.book_mine_48_color))
     }

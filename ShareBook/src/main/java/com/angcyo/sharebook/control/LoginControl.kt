@@ -7,6 +7,7 @@ import com.angcyo.sharebook.http.RxBook
 import com.angcyo.sharebook.http.bean.TokenBean
 import com.angcyo.sharebook.http.service.User
 import com.angcyo.uiview.net.RRetrofit
+import com.angcyo.uiview.utils.RUtils
 import com.angcyo.uiview.utils.T_
 import com.orhanobut.hawk.Hawk
 
@@ -23,6 +24,7 @@ import com.orhanobut.hawk.Hawk
  */
 object LoginControl {
     val KEY_PHONE = "key_phone"
+    val KEY_PHONES = "key_phones"
     val KEY_PWD = "key_pwd"
 
     /**登录成功之后的token*/
@@ -52,10 +54,23 @@ object LoginControl {
     fun setAutoLoginInfo(phone: String, pwd: String) {
         Hawk.put(KEY_PHONE, phone)
         Hawk.put(KEY_PWD, pwd)
+
+        val phones = getPhonesString()
+        if (!phones.contains(phone)) {
+            Hawk.put(KEY_PHONES, phones + "," + phone)
+        }
     }
 
     fun getLastLoginPhone(): String {
         return Hawk.get(KEY_PHONE, "")
+    }
+
+    fun getPhonesList(): List<String> {
+        return RUtils.split(getPhonesString())
+    }
+
+    private fun getPhonesString(): String {
+        return Hawk.get(KEY_PHONES, "")
     }
 
     //自动登录

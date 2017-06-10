@@ -2,9 +2,9 @@
     "code":0,
     "msg":"yes",
     "data":{
-               "version_name":"1.0.5",
-               "version_code":"6",
-               "des":"1:修改下载地址\n2:and so on.\n",
+               "version_name":"1.0.7",
+               "version_code":"7",
+               "des":"1:添加取消收藏\n2:and so on.\n",
                "url":"http://git.oschina.net/angcyo/sharebook/raw/master/app.apk",
                "force":false
            }

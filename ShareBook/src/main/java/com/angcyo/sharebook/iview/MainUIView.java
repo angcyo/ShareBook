@@ -24,7 +24,7 @@ import java.util.ArrayList;
 /**
  * Created by angcyo on 2017-03-12.
  */
-
+@Deprecated
 public class MainUIView extends BaseContentUIView {
 
     UILayoutImpl mMainUILayout;

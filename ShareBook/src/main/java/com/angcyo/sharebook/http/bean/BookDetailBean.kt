@@ -51,6 +51,30 @@ data class BookDetailBean(
          * pic : mpic/1496394069.jpg
          */
 
+        /**
+         * {
+        isbn: "9787040064773",
+        id: "1562739",
+        title: "大学英语自学教程（上册）",
+        subtitle: "",
+        origin_title: "",
+        author: "高远",
+        author_intro: "",
+        translator: "",
+        publisher: "高等教育",
+        pubdate: "1998-11",
+        pages: "",
+        catalog: "",
+        summary: "《大学英语自学教程(上册)》作为我国高等教育组成部分的自学考试，其职责就是在高等教育这个水平上倡导自学、鼓励自学、帮助自学、推动自学，为每一个自学者铺就成才之路。组织编写供读者学习的教材就是履行这个职责的重要环节。毫无疑问，这种教材应当适合自学，应当有利于学习者掌握、了解新知识、新信息，有利于学习者增强创新意识，培养实践能力，形成自学能力，也有利于学习者学以致用，解决实际工作中所遇到的问题。",
+        price: "30.9",
+        tags: "自考,英语,教材,自考教材,大学英语自学教程(上册),学习,实体书,用途：学习",
+        amount: "4",
+        loan: "0",
+        subscriber: "",
+        pic: "http://119.23.221.242/api/res/pic/mpic/1495804500.jpg",
+        favorite: 0
+        }*/
+
         var isbn: String = "",
         var id: String = "",
         var title: String = "",
@@ -69,5 +93,20 @@ data class BookDetailBean(
         var amount: String = "",
         var loan: String = "",
         var subscriber: String = "",
-        var pic: String = ""
+        var pic: String = "",
+        var favorite: Int = 0
+
+
+        /**
+         * {
+        isbn: "9787040064773",
+        title: "大学英语自学教程（上册）",
+        author: "高远",
+        author_intro: "",
+        publisher: "高等教育",
+        pubdate: "1998-11",
+        pages: "",
+        pic: "http://119.23.221.242/api/res/pic/mpic/1495804500.jpg"
+        }
+         * */
 )

@@ -18,10 +18,11 @@ object FavControl {
     fun initFavList() {
         RRetrofit.create(Book::class.java)
                 .getALlFavBook(P.b(Action.GET_ALL_FAV_BOOK))
-                .compose(RxBook.transformer(String::class.java))
-                .subscribe(object : BSub<String>() {
-                    override fun onSucceed(bean: String) {
+                .compose(RxBook.transformerList(BookDetailBean::class.java))
+                .subscribe(object : BSub<List<BookDetailBean>>() {
+                    override fun onSucceed(bean: List<BookDetailBean>) {
                         super.onSucceed(bean)
+                        allFavBook = bean
                     }
                 })
     }

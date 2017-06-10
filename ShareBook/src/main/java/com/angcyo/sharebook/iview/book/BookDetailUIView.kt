@@ -26,6 +26,8 @@ import com.lzy.imagepicker.GlideImageLoader
  */
 class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetailBean, String>() {
 
+    lateinit var bookDeatilBean: BookDetailBean
+
     override fun getTitleBar(): TitleBarPattern {
         return super.getTitleBar().setTitleString("")
     }
@@ -72,23 +74,6 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
         mViewHolder.click(R.id.join_book_view) {
 
         }
-        mViewHolder.click(R.id.fav_book_view) {
-            showLoadView()
-            add(RRetrofit.create(Book::class.java)
-                    .favBook(P.b(Action.FAV_BOOK, "isbn:" + isbn))
-                    .compose(RxBook.transformer(String::class.java))
-                    .subscribe(object : BSub<String>() {
-                        override fun onSucceed(bean: String) {
-                            super.onSucceed(bean)
-                            T_.ok(bean)
-                        }
-
-                        override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
-                            super.onEnd(isError, isNoNetwork, e)
-                            hideLoadView()
-                        }
-                    }))
-        }
     }
 
     override fun createRecyclerRootView(baseContentLayout: RelativeLayout, inflater: LayoutInflater) {
@@ -112,8 +97,11 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                             onUILoadFinish(true)
                         } else {
                             onUILoadFinish()
-                            titleString = bean.first().title
+                            bookDeatilBean = bean.first()
+                            titleString = bookDeatilBean.title
                             mExBaseAdapter.resetAllData(bean)
+
+                            initFavView()
                         }
                     }
 
@@ -124,5 +112,51 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                         }
                     }
                 }))
+    }
+
+    private fun initFavView() {
+        if (bookDeatilBean.favorite == 1) {
+            mViewHolder.tv(R.id.fav_book_view).text = "取消收藏"
+            mViewHolder.click(R.id.fav_book_view) {
+                showLoadView()
+                add(RRetrofit.create(Book::class.java)
+                        .favBook(P.b(Action.UNFAV_BOOK, "isbn:" + isbn))
+                        .compose(RxBook.transformer(String::class.java))
+                        .subscribe(object : BSub<String>() {
+                            override fun onSucceed(bean: String) {
+                                super.onSucceed(bean)
+                                T_.ok(bean)
+                                bookDeatilBean.favorite = 0
+                                initFavView()
+                            }
+
+                            override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
+                                super.onEnd(isError, isNoNetwork, e)
+                                hideLoadView()
+                            }
+                        }))
+            }
+        } else {
+            mViewHolder.tv(R.id.fav_book_view).text = "收藏"
+            mViewHolder.click(R.id.fav_book_view) {
+                showLoadView()
+                add(RRetrofit.create(Book::class.java)
+                        .favBook(P.b(Action.FAV_BOOK, "isbn:" + isbn))
+                        .compose(RxBook.transformer(String::class.java))
+                        .subscribe(object : BSub<String>() {
+                            override fun onSucceed(bean: String) {
+                                super.onSucceed(bean)
+                                T_.ok(bean)
+                                bookDeatilBean.favorite = 1
+                                initFavView()
+                            }
+
+                            override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
+                                super.onEnd(isError, isNoNetwork, e)
+                                hideLoadView()
+                            }
+                        }))
+            }
+        }
     }
 }

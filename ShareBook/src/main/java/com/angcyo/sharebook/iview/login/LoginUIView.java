@@ -5,13 +5,13 @@ import android.view.View;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.control.LoginControl;
+import com.angcyo.sharebook.http.Action;
 import com.angcyo.sharebook.http.BSub;
 import com.angcyo.sharebook.http.P;
 import com.angcyo.sharebook.http.RxBook;
 import com.angcyo.sharebook.http.bean.TokenBean;
 import com.angcyo.sharebook.http.service.User;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
-import com.angcyo.sharebook.http.Action;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
 import com.angcyo.uiview.dialog.UILoading;
@@ -58,6 +58,8 @@ public class LoginUIView extends BaseItemUIView {
 
                 final ExEditText userName = (ExEditText) userNameLayout.findViewById(R.id.edit_text);
                 final ExEditText userPassword = (ExEditText) userPasswordLayout.findViewById(R.id.edit_text);
+
+                userName.setInputTipTextList(LoginControl.INSTANCE.getPhonesList());
 
                 userName.setIsPhone(true, 11);
                 userPassword.setIsPassword(true);
