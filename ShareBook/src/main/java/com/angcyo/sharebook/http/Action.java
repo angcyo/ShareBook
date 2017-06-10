@@ -14,4 +14,5 @@ public class Action {
     public static final String UNFAV_BOOK = "action:10101";//取消收藏
     public static final String GET_ALL_FAV_BOOK = "action:10102";//遍历所有收藏
     public static final String ADD_CART = "action:10206";//添加购物车
+    public static final String ALL_CARTS = "action:10208";//所有购物车
 }

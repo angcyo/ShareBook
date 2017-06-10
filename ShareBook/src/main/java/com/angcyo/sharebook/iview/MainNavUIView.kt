@@ -47,7 +47,7 @@ class MainNavUIView : UINavigationView() {
                 getColor(R.color.base_text_color_dark), SkinHelper.getSkin().themeSubColor,
                 R.drawable.book_recommend_48, R.drawable.book_recommend_48_color))
 
-        pages.add(PageBean(MyOrderUIView(), "", "订单",
+        pages.add(PageBean(MyOrderUIView(), "", "书包",
                 getColor(R.color.base_text_color_dark), SkinHelper.getSkin().themeSubColor,
                 R.drawable.book_order_48, R.drawable.book_order_48_color))
 

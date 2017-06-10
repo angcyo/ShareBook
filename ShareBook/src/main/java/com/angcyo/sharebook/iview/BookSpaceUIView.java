@@ -1,13 +1,16 @@
 package com.angcyo.sharebook.iview;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.adapter.BookAdapter;
@@ -28,6 +31,7 @@ import com.angcyo.uiview.recycler.RExItemDecoration;
 import com.angcyo.uiview.recycler.RRecyclerView;
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter;
 import com.angcyo.uiview.recycler.widget.IShowState;
+import com.angcyo.uiview.utils.UI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +89,17 @@ public class BookSpaceUIView extends BaseRecyclerUIView<BookSpaceUIView.HBean,
                 holder.tv(R.id.text_view).setText(dataBean.type);
                 RRecyclerView recyclerView = holder.reV(R.id.recycler_view);
                 recyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
-                recyclerView.setAdapter(new BookAdapter<>(mActivity, dataBean.mBeanList));
+                recyclerView.setAdapter(new BookAdapter<HomeBean.TopicalBean>(mActivity, dataBean.mBeanList) {
+                    @Override
+                    protected void onBindView(RBaseViewHolder holder, int position, HomeBean.TopicalBean bean) {
+                        super.onBindView(holder, position, bean);
+                        UI.setViewHeight(holder.itemView, getDimensionPixelOffset(R.dimen.base_120dpi));
+                        holder.imgV(R.id.image_view).setScaleType(ImageView.ScaleType.CENTER);
+                        holder.tv(R.id.text_view).setGravity(Gravity.CENTER);
+                        holder.tv(R.id.text_view).setBackgroundColor(Color.TRANSPARENT);
+                        holder.tv(R.id.text_view).setTextColor(getColor(R.color.base_text_color_dark));
+                    }
+                });
 
                 recyclerView.setEnableAutoScroll(false);
             }

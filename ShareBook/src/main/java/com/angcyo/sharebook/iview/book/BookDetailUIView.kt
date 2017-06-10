@@ -9,6 +9,7 @@ import com.angcyo.sharebook.http.P
 import com.angcyo.sharebook.http.RxBook
 import com.angcyo.sharebook.http.bean.BookDetailBean
 import com.angcyo.sharebook.http.bean.HomeBean
+import com.angcyo.sharebook.http.service.Api
 import com.angcyo.sharebook.http.service.Book
 import com.angcyo.sharebook.iview.base.BaseRecyclerUIView
 import com.angcyo.uiview.kotlin.v
@@ -26,7 +27,7 @@ import com.lzy.imagepicker.GlideImageLoader
  */
 class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetailBean, String>() {
 
-    lateinit var bookDeatilBean: BookDetailBean
+    lateinit var bookDetailBean: BookDetailBean
 
     override fun getTitleBar(): TitleBarPattern {
         return super.getTitleBar().setTitleString("")
@@ -72,7 +73,21 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
 
         }
         mViewHolder.click(R.id.join_book_view) {
+            showLoadView()
+            add(RRetrofit.create(Api::class.java)
+                    .api(P.b(Action.ADD_CART, "isbn:" + isbn))
+                    .compose(RxBook.transformer(String::class.java))
+                    .subscribe(object : BSub<String>() {
+                        override fun onSucceed(bean: String) {
+                            super.onSucceed(bean)
+                            T_.ok(bean)
+                        }
 
+                        override fun onEnd(isError: Boolean, isNoNetwork: Boolean, e: Throwable?) {
+                            super.onEnd(isError, isNoNetwork, e)
+                            hideLoadView()
+                        }
+                    }))
         }
     }
 
@@ -97,8 +112,8 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                             onUILoadFinish(true)
                         } else {
                             onUILoadFinish()
-                            bookDeatilBean = bean.first()
-                            titleString = bookDeatilBean.title
+                            bookDetailBean = bean.first()
+                            titleString = bookDetailBean.title
                             mExBaseAdapter.resetAllData(bean)
 
                             initFavView()
@@ -115,7 +130,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
     }
 
     private fun initFavView() {
-        if (bookDeatilBean.favorite == 1) {
+        if (bookDetailBean.favorite == 1) {
             mViewHolder.tv(R.id.fav_book_view).text = "取消收藏"
             mViewHolder.click(R.id.fav_book_view) {
                 showLoadView()
@@ -126,7 +141,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                             override fun onSucceed(bean: String) {
                                 super.onSucceed(bean)
                                 T_.ok(bean)
-                                bookDeatilBean.favorite = 0
+                                bookDetailBean.favorite = 0
                                 initFavView()
                             }
 
@@ -147,7 +162,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                             override fun onSucceed(bean: String) {
                                 super.onSucceed(bean)
                                 T_.ok(bean)
-                                bookDeatilBean.favorite = 1
+                                bookDetailBean.favorite = 1
                                 initFavView()
                             }
 

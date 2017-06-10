@@ -1,53 +1,62 @@
 package com.angcyo.sharebook.iview;
 
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.widget.RelativeLayout;
+import android.view.View;
 
 import com.angcyo.sharebook.R;
-import com.angcyo.sharebook.adapter.BookAdapter;
-import com.angcyo.uiview.base.UIRecyclerUIView;
+import com.angcyo.sharebook.http.Action;
+import com.angcyo.sharebook.http.BSub;
+import com.angcyo.sharebook.http.P;
+import com.angcyo.sharebook.http.RxBook;
+import com.angcyo.sharebook.http.bean.BookDetailBean;
+import com.angcyo.sharebook.http.service.Api;
+import com.angcyo.sharebook.iview.base.BaseRecyclerUIView;
+import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter;
-import com.angcyo.uiview.recycler.widget.IShowState;
+import com.angcyo.uiview.widget.RExTextView;
+import com.lzy.imagepicker.GlideImageLoader;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by angcyo on 2017-03-11.
  */
 
-public class MyOrderUIView extends UIRecyclerUIView {
+public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, String> {
 
     @Override
     protected String getTitleString() {
-        return "订单";
+        return "我的书包";
     }
 
     @Override
     protected RExBaseAdapter createAdapter() {
-        return new RExBaseAdapter<String, MainItemBean, String>(mActivity) {
+        return new RExBaseAdapter<String, BookDetailBean, String>(mActivity) {
             @Override
             protected int getItemLayoutId(int viewType) {
-                return R.layout.item_home_type_layout;
+                return R.layout.item_order_list_layout;
             }
 
             @Override
-            protected void onBindDataView(RBaseViewHolder holder, int posInData, MainItemBean dataBean) {
-                holder.tv(R.id.text_view).setText("pos:" + posInData);
-                holder.reV(R.id.recycler_view).setAdapter(new BookAdapter(mActivity, createBooks()));
+            protected void onBindDataView(RBaseViewHolder holder, int posInData, BookDetailBean bean) {
+                GlideImageLoader.displayImage(holder.imgV(R.id.image_view), bean.getPic(), R.drawable.default_image);
+                holder.tv(R.id.title_view).setText(bean.getTitle());
+                holder.tv(R.id.author_view).setText(bean.getAuthor());
+                holder.tv(R.id.summary_view).setText(bean.getSummary());
+                RExTextView summaryView = holder.v(R.id.summary_view);
+                summaryView.setMaxShowLine(4);
+                summaryView.setFoldString("");
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+
             }
         };
-    }
-
-    private List<String> createBooks() {
-        List<String> beanList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            beanList.add("");
-        }
-        return beanList;
     }
 
     @Override
@@ -56,37 +65,36 @@ public class MyOrderUIView extends UIRecyclerUIView {
     }
 
     @Override
-    protected void afterInflateView(RelativeLayout baseContentLayout) {
-        mExBaseAdapter.setShowState(IShowState.LOADING);
-    }
+    protected void onUILoadData() {
+        super.onUILoadData();
+        add(RRetrofit.create(Api.class)
+                .api(P.b(Action.ALL_CARTS))
+                .compose(RxBook.transformerList(BookDetailBean.class))
+                .subscribe(new BSub<List<BookDetailBean>>() {
+                    @Override
+                    public void onSucceed(List<BookDetailBean> bean) {
+                        super.onSucceed(bean);
+                        if (bean.isEmpty()) {
+                            showEmptyLayout();
+                        } else {
+                            showContentLayout();
+                            mExBaseAdapter.resetAllData(bean);
+                        }
+                    }
 
-    @Override
-    public void onViewShow(Bundle bundle) {
-        super.onViewShow(bundle);
-        //test();
+                    @Override
+                    public void onEnd(boolean isError, boolean isNoNetwork, Throwable e) {
+                        super.onEnd(isError, isNoNetwork, e);
+                        onUILoadFinish();
+                        if (isError) {
+                            showNonetLayout(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    loadData();
+                                }
+                            });
+                        }
+                    }
+                }));
     }
-
-    @Override
-    public void onViewShowFirst(Bundle bundle) {
-        super.onViewShowFirst(bundle);
-//        mExBaseAdapter.resetAllData(createAllDatas());
-//        postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mExBaseAdapter.setShowState(IShowState.ERROR);
-//            }
-//        }, 1000);
-    }
-
-    private List<MainItemBean> createAllDatas() {
-        List<MainItemBean> beanList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            beanList.add(new MainItemBean());
-        }
-        return beanList;
-    }
-
-    public static class MainItemBean {
-    }
-
 }

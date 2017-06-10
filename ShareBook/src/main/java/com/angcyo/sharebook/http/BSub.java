@@ -8,7 +8,12 @@ import com.angcyo.uiview.net.RSubscriber;
 
 public abstract class BSub<T> extends RSubscriber<T> {
     @Override
-    public void onNoNetwork() {
-        super.onNoNetwork();
+    public void onSucceed(T bean) {
+        super.onSucceed(bean);
+    }
+
+    @Override
+    public void onEnd(boolean isError, boolean isNoNetwork, Throwable e) {
+        super.onEnd(isError, isNoNetwork, e);
     }
 }
