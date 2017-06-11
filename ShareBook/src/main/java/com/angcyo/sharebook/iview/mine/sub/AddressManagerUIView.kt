@@ -51,6 +51,7 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
 
                 holder.cV(R.id.check_box).isChecked = dataBean.id == "1"
                 holder.cV(R.id.check_box).isEnabled = dataBean.id != "1"
+                holder.cV(R.id.check_box).text = if (dataBean.id == "1") "默认地址" else "设置默认地址"
 
                 holder.click(R.id.check_box) {
                     defaultAddrid(dataBean.id)

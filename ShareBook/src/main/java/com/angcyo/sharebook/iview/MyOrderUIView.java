@@ -152,6 +152,9 @@ public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, St
                     public void onClick(View v) {
                         deleteItem(posInData);
                         trash(bean.getIsbn());
+                        if (getRawItemCount() == 0) {
+                            showEmptyLayout();
+                        }
                     }
                 });
             }
