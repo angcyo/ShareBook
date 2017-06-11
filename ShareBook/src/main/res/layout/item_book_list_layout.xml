@@ -2,6 +2,7 @@
 <com.angcyo.uiview.viewgroup.RLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/book_root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/base_bg_selector"

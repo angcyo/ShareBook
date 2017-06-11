@@ -8,12 +8,27 @@
     android:orientation="horizontal"
     app:r_background="@color/base_white">
 
-    <com.angcyo.uiview.widget.RImageCheckView
-        android:id="@+id/check_box"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/base_xhdpi"
-        android:src="@drawable/base_check_circle_selector"/>
+        android:orientation="vertical">
+
+        <com.angcyo.uiview.widget.RImageCheckView
+            android:id="@+id/check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/base_xhdpi"
+            android:src="@drawable/base_check_circle_selector"/>
+
+        <ImageView
+            android:id="@+id/trash_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_xhdpi"
+            android:padding="@dimen/base_xhdpi"
+            android:src="@drawable/base_trash_selector"/>
+
+    </LinearLayout>
 
     <include layout="@layout/item_book_list_layout"/>
 </com.angcyo.uiview.viewgroup.RLinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.angcyo.uiview.rsen.RefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.angcyo.uiview.recycler.RRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.angcyo.uiview.rsen.RefreshLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_line"
+        android:background="@color/default_base_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_50dpi"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/select_all"
+            style="@style/BaseDarkTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_xhdpi"
+            android:button="@drawable/base_check_circle_selector"
+            android:paddingStart="@dimen/base_hdpi"
+            android:text="全选"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingEnd="@dimen/base_xhdpi">
+
+            <com.angcyo.uiview.widget.RTextView
+                android:id="@+id/price_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:paddingStart="@dimen/base_mdpi"
+                android:text="0.0"
+                android:textColor="@color/base_red"
+                android:textSize="22sp"/>
+
+            <com.angcyo.uiview.widget.RTextView
+                android:id="@+id/tip1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/price_view"
+                android:layout_toStartOf="@id/price_view"
+                android:text="¥"
+                android:textColor="@color/base_red"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tip2"
+                style="@style/BaseDarkTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/tip1"
+                android:layout_toStartOf="@id/tip1"
+                android:text="合计: "/>
+
+        </RelativeLayout>
+
+        <com.angcyo.uiview.widget.RTextView
+            android:id="@+id/settle_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/base_red_color_bg_selector"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingEnd="@dimen/base_xxhdpi"
+            android:paddingStart="@dimen/base_xxhdpi"
+            android:tag="结算(%1$s)"
+            android:text="0"
+            android:textColor="@color/base_white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

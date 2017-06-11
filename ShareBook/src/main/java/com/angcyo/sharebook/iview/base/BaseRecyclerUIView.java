@@ -87,6 +87,21 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
     }
 
     /**
+     * 重置界面状态
+     */
+    protected void onUILoadReset() {
+        hideLoadView();
+        if (mRefreshLayout != null) {
+            mRefreshLayout.setRefreshEnd();
+        }
+        if (mExBaseAdapter != null) {
+            if (mExBaseAdapter.isEnableLoadMore()) {
+                mExBaseAdapter.setLoadMoreEnd();
+            }
+        }
+    }
+
+    /**
      * 恢复界面
      */
     protected void onUILoadFinish() {
