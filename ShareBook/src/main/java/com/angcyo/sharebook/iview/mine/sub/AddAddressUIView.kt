@@ -43,6 +43,10 @@ class AddAddressUIView : BaseItemUIView() {
 
     fun setEditAddress(bean: AddressBean): AddAddressUIView {
         addressBean = bean
+
+        this@AddAddressUIView.province = addressBean!!.province
+        this@AddAddressUIView.city = addressBean!!.city
+        this@AddAddressUIView.district = addressBean!!.area
         return this
     }
 
@@ -101,7 +105,7 @@ class AddAddressUIView : BaseItemUIView() {
     private fun addAddress(address: AddressBean) {
         UILoading.show2(mILayout).setLoadingTipText(if (addrid.isEmpty()) "正在添加收货地址..." else "正在更新收货地址").setCanCancel(false)
         add(RRetrofit.create(Api::class.java)
-                .api(P.b(Action.ADD_ADDRESS, "addrid:$addrid", "addr:${Json.to(address)}"))
+                .api(P.b(if (addrid.isEmpty()) Action.ADD_ADDRESS else Action.UPDATE_ADDRESS, "addrid:$addrid", "addr:${Json.to(address)}"))
                 .compose(RxBook.transformer(String::class.java))
                 .subscribe(object : BSub<String>() {
                     override fun onSucceed(bean: String) {

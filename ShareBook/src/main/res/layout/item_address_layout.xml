@@ -58,11 +58,18 @@
 
             <CheckBox
                 android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/base_bg_selector"
+                android:button="@drawable/base_check_circle_selector"
+                android:paddingBottom="@dimen/base_ldpi"
+                android:paddingTop="@dimen/base_ldpi"
+                android:text="设置默认地址"/>
+
+            <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@drawable/base_check_circle_selector"
-                android:text="设置默认地址"/>
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/edit_view"

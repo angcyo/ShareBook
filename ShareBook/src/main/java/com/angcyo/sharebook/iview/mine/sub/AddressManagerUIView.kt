@@ -49,7 +49,7 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
                 holder.tv(R.id.phone_view).text = dataBean.phone
                 holder.tv(R.id.address_view).text = "${dataBean.province} ${dataBean.city} ${dataBean.area} ${dataBean.street}"
 
-                holder.cV(R.id.check_box).isChecked = dataBean.id == "0"
+                holder.cV(R.id.check_box).isChecked = dataBean.id == "1"
 
                 holder.click(R.id.check_box) {
                     defaultAddrid(dataBean.id)
@@ -61,6 +61,10 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
                 holder.click(R.id.delete_view) {
                     deleteAddrid(dataBean.id)
                     deleteItem(posInData)
+
+                    if (rawItemCount == 0) {
+                        showEmptyLayout()
+                    }
                 }
             }
         }
