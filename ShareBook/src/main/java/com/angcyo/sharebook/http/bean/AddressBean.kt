@@ -14,11 +14,11 @@ data class AddressBean(
          * street : aliyun building
          */
 
-        val id: String? = null,
-        var name: String? = null,
-        var phone: String? = null,
-        var province: String? = null,
-        var city: String? = null,
-        var area: String? = null,
-        var street: String? = null
+        val id: String = "",
+        var name: String = "",
+        var phone: String = "",
+        var province: String = "",
+        var city: String = "",
+        var area: String = "",
+        var street: String = ""
 )

@@ -19,5 +19,7 @@ public class Action {
 
     public static final String ALL_ADDRESS = "action:10005";//所有地址
     public static final String ADD_ADDRESS = "action:10004";//add地址
+    public static final String DEL_ADDRESS = "action:10006";//del地址
+    public static final String DEFAULT_ADDRESS = "action:10008";//默认地址
 
 }
