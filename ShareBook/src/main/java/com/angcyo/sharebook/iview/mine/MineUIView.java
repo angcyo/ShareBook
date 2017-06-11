@@ -106,7 +106,7 @@ public class MineUIView extends BaseItemUIView {
             @Override
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
                 ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
-                itemLayout.setItemText("收货地址管理");
+                itemLayout.setItemText("地址管理");
                 itemLayout.setLeftDrawableRes(R.drawable.default_address_32);
 
                 itemLayout.setOnClickListener(new View.OnClickListener() {
