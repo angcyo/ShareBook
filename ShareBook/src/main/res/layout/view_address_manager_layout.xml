@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.angcyo.uiview.rsen.RefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.angcyo.uiview.recycler.RRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.angcyo.uiview.rsen.RefreshLayout>
+
+    <com.angcyo.uiview.widget.RTextView
+        android:id="@+id/add_address_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_item_size"
+        android:background="@drawable/base_red_color_bg_selector"
+        android:gravity="center"
+        android:paddingEnd="@dimen/base_xxhdpi"
+        android:paddingStart="@dimen/base_xxhdpi"
+        android:text="新增收货地址"
+        android:textColor="@color/base_white"/>
+
+</LinearLayout>

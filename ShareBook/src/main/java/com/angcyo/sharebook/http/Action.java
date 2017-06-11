@@ -16,4 +16,8 @@ public class Action {
     public static final String ADD_CART = "action:10206";//添加购物车
     public static final String DEL_CART = "action:10207";//删除购物车
     public static final String ALL_CARTS = "action:10208";//所有购物车
+
+    public static final String ALL_ADDRESS = "action:10005";//所有地址
+    public static final String ADD_ADDRESS = "action:10004";//add地址
+
 }

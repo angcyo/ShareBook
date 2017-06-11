@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_white"
+    android:orientation="vertical">
+
+    <com.angcyo.uiview.widget.ExEditText
+        android:id="@+id/name_view"
+        style="@style/BaseSingleMainTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base_xhdpi"
+        android:layout_marginStart="@dimen/base_xhdpi"
+        android:hint="收货人姓名"/>
+
+    <com.angcyo.uiview.widget.ExEditText
+        android:id="@+id/phone_view"
+        style="@style/BaseSingleMainTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base_xhdpi"
+        android:layout_marginStart="@dimen/base_xhdpi"
+        android:hint="手机号码"/>
+
+    <com.angcyo.uiview.widget.ItemInfoLayout
+        android:id="@+id/address_view"
+        style="@style/BaseItemInfoStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_text="省 市 区"/>
+
+    <com.angcyo.uiview.widget.ExEditText
+        android:id="@+id/street_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base_xhdpi"
+        android:layout_marginStart="@dimen/base_xhdpi"
+        android:gravity="top"
+        android:hint="详细地址"
+        android:maxHeight="200dp"
+        android:minHeight="@dimen/base_100dpi"/>
+
+    <TextView
+        android:id="@+id/save_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_item_size"
+        android:layout_margin="@dimen/base_xhdpi"
+        android:background="@drawable/base_red_color_bg_selector"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="@color/base_white"/>
+
+</LinearLayout>

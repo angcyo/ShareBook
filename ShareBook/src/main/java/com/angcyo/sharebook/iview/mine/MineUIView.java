@@ -3,15 +3,19 @@ package com.angcyo.sharebook.iview.mine;
 import android.os.Bundle;
 import android.view.View;
 
+import com.angcyo.library.utils.L;
+import com.angcyo.sharebook.BuildConfig;
 import com.angcyo.sharebook.R;
-import com.angcyo.sharebook.control.FavControl;
 import com.angcyo.sharebook.control.LoginControl;
 import com.angcyo.sharebook.control.VersionControl;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
 import com.angcyo.sharebook.iview.login.LoginUIView;
+import com.angcyo.sharebook.iview.mine.sub.AddressManagerUIView;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
 import com.angcyo.uiview.dialog.UILoading;
+import com.angcyo.uiview.github.pickerview.CityDialog;
+import com.angcyo.uiview.github.pickerview.DateDialog;
 import com.angcyo.uiview.github.utilcode.utils.AppUtils;
 import com.angcyo.uiview.github.utilcode.utils.ClipboardUtils;
 import com.angcyo.uiview.model.TitleBarPattern;
@@ -97,6 +101,23 @@ public class MineUIView extends BaseItemUIView {
 
             }
         });
+
+        items.add(new SingleItem(SingleItem.Type.TOP) {
+            @Override
+            public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
+                ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
+                itemLayout.setItemText("收货地址管理");
+                itemLayout.setLeftDrawableRes(R.drawable.default_address_32);
+
+                itemLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mParentILayout.startIView(new AddressManagerUIView());
+                    }
+                });
+            }
+        });
+
         items.add(new SingleItem(SingleItem.Type.TOP) {
             @Override
             public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
@@ -128,27 +149,45 @@ public class MineUIView extends BaseItemUIView {
                 });
             }
         });
-        items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
-            @Override
-            public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
-                ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
-                itemLayout.setItemText("测试条目:" + posInData);
-            }
-        });
-        items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
-            @Override
-            public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
-                ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
-                itemLayout.setItemText("测试条目:" + posInData);
 
-                itemLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FavControl.INSTANCE.initFavList();
-                    }
-                });
-            }
-        });
+        if (BuildConfig.DEBUG) {
+            items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
+                @Override
+                public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
+                    ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
+                    itemLayout.setItemText("测试条目:" + posInData);
+
+                    itemLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mParentILayout.startIView(new DateDialog(new DateDialog.SimpleDateConfig()));
+                        }
+                    });
+                }
+            });
+            items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
+                @Override
+                public void onBindView(RBaseViewHolder holder, int posInData, Item dataBean) {
+                    ItemInfoLayout itemLayout = holder.v(R.id.item_info_layout);
+                    itemLayout.setItemText("测试条目:" + posInData);
+
+                    itemLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //FavControl.INSTANCE.initFavList();
+                            mParentILayout.startIView(new CityDialog(new CityDialog.CityListener() {
+
+                                @Override
+                                public void onCitySelector(String province, String city, String district) {
+                                    L.e("onCitySelector() -> " + province + " " + city + " " + district);
+                                }
+                            }));
+
+                        }
+                    });
+                }
+            });
+        }
 
         items.add(new SingleItem(SingleItem.Type.TOP_LINE) {
             @Override
