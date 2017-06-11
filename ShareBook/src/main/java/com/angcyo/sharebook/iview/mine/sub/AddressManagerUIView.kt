@@ -50,6 +50,7 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
                 holder.tv(R.id.address_view).text = "${dataBean.province} ${dataBean.city} ${dataBean.area} ${dataBean.street}"
 
                 holder.cV(R.id.check_box).isChecked = dataBean.id == "1"
+                holder.cV(R.id.check_box).isEnabled = dataBean.id != "1"
 
                 holder.click(R.id.check_box) {
                     defaultAddrid(dataBean.id)

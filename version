@@ -2,9 +2,9 @@
     "code":0,
     "msg":"yes",
     "data":{
-               "version_name":"1.0.8",
-               "version_code":"8",
-               "des":"1:完善书包\n2:添加收货地址管理\n3:and so on.\n",
+               "version_name":"1.0.9_pre",
+               "version_code":"9",
+               "des":"1:修复删除金额不变\n2:不允许重复设置默认地址\n3:and so on.\n",
                "url":"http://git.oschina.net/angcyo/sharebook/raw/master/app.apk",
                "force":false
            }
