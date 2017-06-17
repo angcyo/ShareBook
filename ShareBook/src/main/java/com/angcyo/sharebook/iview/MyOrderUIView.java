@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.angcyo.sharebook.R;
+import com.angcyo.sharebook.control.LoginControl;
 import com.angcyo.sharebook.http.Action;
 import com.angcyo.sharebook.http.BSub;
 import com.angcyo.sharebook.http.P;
@@ -15,6 +16,7 @@ import com.angcyo.sharebook.http.RxBook;
 import com.angcyo.sharebook.http.bean.BookDetailBean;
 import com.angcyo.sharebook.http.service.Api;
 import com.angcyo.sharebook.iview.base.BaseRecyclerUIView;
+import com.angcyo.sharebook.iview.login.LoginUIView;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
@@ -229,5 +231,30 @@ public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, St
                         //UILoading.hide();
                     }
                 }));
+    }
+
+    @Override
+    public void loadData() {
+        if (LoginControl.INSTANCE.isLogin()) {
+            super.loadData();
+        } else {
+            showErrorLayout();
+        }
+    }
+
+    @Override
+    protected int getBaseErrorLayoutId() {
+        return R.layout.error_login_layout;
+    }
+
+    @Override
+    protected void initBaseErrorLayout(View view) {
+        view.findViewById(R.id.login_view).setBackground(getTipButtonSelector());
+        view.findViewById(R.id.login_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mParentILayout.startIView(new LoginUIView().setEnableClipMode(ClipMode.CLIP_BOTH, v));
+            }
+        });
     }
 }
