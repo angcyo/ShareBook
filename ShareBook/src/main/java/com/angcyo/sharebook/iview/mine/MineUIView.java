@@ -11,6 +11,7 @@ import com.angcyo.sharebook.control.VersionControl;
 import com.angcyo.sharebook.iview.base.BaseItemUIView;
 import com.angcyo.sharebook.iview.login.LoginUIView;
 import com.angcyo.sharebook.iview.mine.sub.AddressManagerUIView;
+import com.angcyo.sharebook.listener.LoginClickListener;
 import com.angcyo.uiview.base.Item;
 import com.angcyo.uiview.base.SingleItem;
 import com.angcyo.uiview.dialog.UILoading;
@@ -109,12 +110,12 @@ public class MineUIView extends BaseItemUIView {
                 itemLayout.setItemText("地址管理");
                 itemLayout.setLeftDrawableRes(R.drawable.default_address_32);
 
-                itemLayout.setOnClickListener(new View.OnClickListener() {
+                itemLayout.setOnClickListener(new LoginClickListener(mParentILayout, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mParentILayout.startIView(new AddressManagerUIView());
                     }
-                });
+                }));
             }
         });
 

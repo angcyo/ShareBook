@@ -12,6 +12,7 @@ import com.angcyo.sharebook.http.bean.HomeBean
 import com.angcyo.sharebook.http.service.Api
 import com.angcyo.sharebook.http.service.Book
 import com.angcyo.sharebook.iview.base.BaseRecyclerUIView
+import com.angcyo.sharebook.listener.LoginClickListener
 import com.angcyo.uiview.kotlin.v
 import com.angcyo.uiview.model.TitleBarPattern
 import com.angcyo.uiview.net.RRetrofit
@@ -69,10 +70,11 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
 
     override fun initOnShowContentLayout() {
         super.initOnShowContentLayout()
-        mViewHolder.click(R.id.borrow_book_view) {
+        mViewHolder.click(R.id.borrow_book_view, LoginClickListener(mILayout) {
 
-        }
-        mViewHolder.click(R.id.join_book_view) {
+        })
+
+        mViewHolder.click(R.id.join_book_view, LoginClickListener(mILayout) {
             showLoadView()
             add(RRetrofit.create(Api::class.java)
                     .api(P.b(Action.ADD_CART, "isbn:" + isbn))
@@ -88,7 +90,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                             hideLoadView()
                         }
                     }))
-        }
+        })
     }
 
     override fun createRecyclerRootView(baseContentLayout: RelativeLayout, inflater: LayoutInflater) {
