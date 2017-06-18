@@ -2,6 +2,7 @@ package com.angcyo.sharebook.iview.mine.sub
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.angcyo.sharebook.R
 import com.angcyo.sharebook.http.Action
@@ -11,21 +12,51 @@ import com.angcyo.sharebook.http.RxBook
 import com.angcyo.sharebook.http.bean.AddressBean
 import com.angcyo.sharebook.http.service.Api
 import com.angcyo.sharebook.iview.base.BaseRecyclerUIView
+import com.angcyo.uiview.model.TitleBarPattern
 import com.angcyo.uiview.net.RRetrofit
 import com.angcyo.uiview.recycler.RBaseViewHolder
 import com.angcyo.uiview.recycler.RRecyclerView
 import com.angcyo.uiview.recycler.adapter.RExBaseAdapter
+import com.angcyo.uiview.recycler.adapter.RModelAdapter
 import com.angcyo.uiview.recycler.widget.IShowState
 import com.angcyo.uiview.rsen.RefreshLayout
 import com.angcyo.uiview.utils.T_
+import com.angcyo.uiview.widget.RImageCheckView
+import rx.functions.Action1
 
 /**
  * 收货地址管理
  * Created by angcyo on 2017-06-11.
  */
-class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
+class AddressManagerUIView(var isSelectorMode: Boolean = false) : BaseRecyclerUIView<String, AddressBean, String>() {
+
+    private var selectorAction: Action1<String>? = null
+
+    fun setSelectorAction(selectorAction: Action1<String>?): AddressManagerUIView {
+        this.selectorAction = selectorAction
+        return this
+    }
+
+    var selectorId: String? = null
+
+    override fun getTitleBar(): TitleBarPattern {
+        val titleBar = super.getTitleBar()
+
+        if (isSelectorMode) {
+            titleBar.addRightItem(TitleBarPattern.buildText("选择") {
+                if (selectorId.isNullOrEmpty()) {
+                    T_.error("请选择地址")
+                } else {
+                    finishIView()
+                }
+            })
+        }
+
+        return titleBar
+    }
+
     override fun getTitleString(): String {
-        return "收货地址管理"
+        return if (isSelectorMode) "选择收货地址" else "收货地址管理"
     }
 
     override fun createRecyclerRootView(baseContentLayout: RelativeLayout, inflater: LayoutInflater) {
@@ -38,13 +69,38 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
     }
 
     override fun createAdapter(): RExBaseAdapter<String, AddressBean, String> {
-        return object : RExBaseAdapter<String, AddressBean, String>(mActivity) {
+        val adapter = object : RExBaseAdapter<String, AddressBean, String>(mActivity) {
             override fun getItemLayoutId(viewType: Int): Int {
                 return R.layout.item_address_layout
             }
 
+            override fun onSelectorChange(allSelectorList: MutableList<Int>) {
+                if (allSelectorList.isEmpty()) {
+                    selectorId = null
+                } else {
+                    selectorId = allDatas[allSelectorList[0]].id
+                }
+            }
+
+            override fun onBindModelView(model: Int, isSelector: Boolean, holder: RBaseViewHolder, position: Int, bean: AddressBean) {
+                super.onBindModelView(model, isSelector, holder, position, bean)
+                val selectorCheckView: RImageCheckView = holder.v(R.id.selector_check_box)
+                selectorCheckView.isChecked = isSelector
+            }
+
             override fun onBindDataView(holder: RBaseViewHolder, posInData: Int, dataBean: AddressBean) {
                 super.onBindDataView(holder, posInData, dataBean)
+
+                if (isSelectorMode) {
+                    holder.v<View>(R.id.selector_check_box).visibility = View.VISIBLE
+                    holder.v<View>(R.id.line).visibility = View.GONE
+                    holder.v<View>(R.id.bottom_layout).visibility = View.GONE
+
+                    holder.click(R.id.item_root_layout) {
+                        setSelectorPosition(posInData)
+                    }
+                }
+
                 holder.tv(R.id.name_view).text = dataBean.name
                 holder.tv(R.id.phone_view).text = dataBean.phone
                 holder.tv(R.id.address_view).text = "${dataBean.province} ${dataBean.city} ${dataBean.area} ${dataBean.street}"
@@ -52,6 +108,10 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
                 holder.cV(R.id.check_box).isChecked = dataBean.id == "1"
                 holder.cV(R.id.check_box).isEnabled = dataBean.id != "1"
                 holder.cV(R.id.check_box).text = if (dataBean.id == "1") "默认地址" else "设置默认地址"
+
+                if (dataBean.id == "1") {
+                    setSelectorPosition(posInData)
+                }
 
                 holder.click(R.id.check_box) {
                     defaultAddrid(dataBean.id)
@@ -70,6 +130,8 @@ class AddressManagerUIView : BaseRecyclerUIView<String, AddressBean, String>() {
                 }
             }
         }
+        adapter.model = if (isSelectorMode) RModelAdapter.MODEL_SINGLE else RModelAdapter.MODEL_NORMAL
+        return adapter
     }
 
     override fun initOnShowContentLayout() {

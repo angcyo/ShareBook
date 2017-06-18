@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.angcyo.library.utils.L;
 import com.angcyo.sharebook.R;
 import com.angcyo.sharebook.control.LoginControl;
 import com.angcyo.sharebook.http.Action;
@@ -17,6 +18,8 @@ import com.angcyo.sharebook.http.bean.BookDetailBean;
 import com.angcyo.sharebook.http.service.Api;
 import com.angcyo.sharebook.iview.base.BaseRecyclerUIView;
 import com.angcyo.sharebook.iview.login.LoginUIView;
+import com.angcyo.sharebook.iview.mine.sub.AddressManagerUIView;
+import com.angcyo.uiview.dialog.UILoading;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.recycler.RBaseItemDecoration;
 import com.angcyo.uiview.recycler.RBaseViewHolder;
@@ -32,12 +35,15 @@ import com.lzy.imagepicker.GlideImageLoader;
 
 import java.util.List;
 
+import rx.functions.Action1;
+
 /**
  * Created by angcyo on 2017-03-11.
  */
 
 public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, String> {
 
+    String isbns = "";
     private TextView mPriceView;
     private CheckBox mSelectAll;
     private TextView mSettleView;
@@ -101,9 +107,54 @@ public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, St
         mSettleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mParentILayout.startIView(new AddressManagerUIView(true).setSelectorAction(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        submitOrder(s);
+                    }
+                }));
             }
         });
+    }
+
+    /**
+     * 提交订单
+     *
+     * @param s 地址id
+     */
+    private void submitOrder(String s) {
+        UILoading.show2(mParentILayout).setLoadingTipText("正在提交...").setCanCancel(false);
+        StringBuilder orderinfo = new StringBuilder();
+        orderinfo.append("{");
+
+        orderinfo.append("\"isbns\":");
+        orderinfo.append(isbns);
+        orderinfo.append("\"addrid\":");
+        orderinfo.append(s);
+        orderinfo.append("}");
+
+        L.e("submitOrder() -> " + orderinfo.toString());
+
+        add(RRetrofit.create(Api.class)
+                .api(P.b("orderinfo:" + orderinfo.toString()))
+                .compose(RxBook.transformer(String.class))
+                .subscribe(new BSub<String>() {
+                    @Override
+                    public void onSucceed(String bean) {
+                        super.onSucceed(bean);
+                        T_.ok(bean);
+                    }
+
+                    @Override
+                    public void onEnd(boolean isError, int errorCode, boolean isNoNetwork, Throwable e) {
+                        super.onEnd(isError, errorCode, isNoNetwork, e);
+                        UILoading.hide();
+                        loadData();
+                    }
+                })
+        );
+
+
     }
 
     @Override
@@ -126,6 +177,16 @@ public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, St
                         setSelectorPosition(position, checkView);
                     }
                 });
+            }
+
+            @Override
+            protected void onSelectorChange(List<Integer> allSelectorList) {
+                StringBuffer build = new StringBuffer();
+                for (Integer i : allSelectorList) {
+                    build.append(getAllDatas().get(i).getIsbn());
+                    build.append(",");
+                }
+                isbns = build.toString();
             }
 
             @Override
