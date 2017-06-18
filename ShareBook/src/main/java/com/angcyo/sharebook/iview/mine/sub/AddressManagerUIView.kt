@@ -48,6 +48,7 @@ class AddressManagerUIView(var isSelectorMode: Boolean = false) : BaseRecyclerUI
                     T_.error("请选择地址")
                 } else {
                     finishIView()
+                    selectorAction?.call(selectorId)
                 }
             })
         }
@@ -97,6 +98,9 @@ class AddressManagerUIView(var isSelectorMode: Boolean = false) : BaseRecyclerUI
                     holder.v<View>(R.id.bottom_layout).visibility = View.GONE
 
                     holder.click(R.id.item_root_layout) {
+                        setSelectorPosition(posInData)
+                    }
+                    holder.click(R.id.selector_check_box) {
                         setSelectorPosition(posInData)
                     }
                 }
