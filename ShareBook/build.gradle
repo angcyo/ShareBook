@@ -21,8 +21,8 @@ android {
         minSdkVersion rootProject.M_SDK as int
         targetSdkVersion rootProject.T_SDK as int
         applicationId package_name
-        versionCode 11
-        versionName "1.0.10"
+        versionCode 12
+        versionName "1.0.10_RC1"
         multiDexEnabled true
 
         manifestPlaceholders = [

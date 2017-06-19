@@ -36,7 +36,9 @@ public class LoginClickListener implements View.OnClickListener {
                         public void onDialogClick(UIDialog dialog, View clickView) {
                             mLayout.startIView(new LoginUIView().setEnableClipMode(UIBaseView.ClipMode.CLIP_BOTH, clickView));
                         }
-                    });
+                    })
+                    .showDialog(mLayout)
+            ;
         }
     }
 }

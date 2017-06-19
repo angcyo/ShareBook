@@ -40,9 +40,10 @@ public class RxBook {
                         .map(new Func1<ResponseBody, T>() {
                             @Override
                             public T call(ResponseBody stringResponse) {
-                                T bean;
+                                T bean = null;
                                 String body;
                                 try {
+
                                     body = stringResponse.string();
 
                                     //"接口返回数据-->\n" +
@@ -76,7 +77,11 @@ public class RxBook {
                                     throw new RException(-1000, "服务器数据异常.", e.getMessage());
                                 }
                                 //throw new NullPointerException("无数据.");
-                                return null;
+
+                                if (bean == null && type == String.class) {
+                                    bean = (T) "";
+                                }
+                                return bean;
                             }
                         })
                         .retry(RETRY_COUNT)

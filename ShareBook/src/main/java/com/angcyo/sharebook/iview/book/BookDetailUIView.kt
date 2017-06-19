@@ -134,7 +134,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
     private fun initFavView() {
         if (bookDetailBean.favorite == 1) {
             mViewHolder.tv(R.id.fav_book_view).text = "取消收藏"
-            mViewHolder.click(R.id.fav_book_view) {
+            mViewHolder.click(R.id.fav_book_view, LoginClickListener(mILayout) {
                 showLoadView()
                 add(RRetrofit.create(Book::class.java)
                         .favBook(P.b(Action.UNFAV_BOOK, "isbn:" + isbn))
@@ -152,10 +152,10 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                                 hideLoadView()
                             }
                         }))
-            }
+            })
         } else {
             mViewHolder.tv(R.id.fav_book_view).text = "收藏"
-            mViewHolder.click(R.id.fav_book_view) {
+            mViewHolder.click(R.id.fav_book_view, LoginClickListener(mILayout) {
                 showLoadView()
                 add(RRetrofit.create(Book::class.java)
                         .favBook(P.b(Action.FAV_BOOK, "isbn:" + isbn))
@@ -173,7 +173,7 @@ class BookDetailUIView(var isbn: String) : BaseRecyclerUIView<String, BookDetail
                                 hideLoadView()
                             }
                         }))
-            }
+            })
         }
     }
 }

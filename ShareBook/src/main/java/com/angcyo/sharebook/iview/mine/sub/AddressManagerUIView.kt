@@ -156,10 +156,10 @@ class AddressManagerUIView(var isSelectorMode: Boolean = false) : BaseRecyclerUI
                 .api(P.b(Action.ALL_ADDRESS))
                 .compose(RxBook.transformerList(AddressBean::class.java))
                 .subscribe(object : BSub<List<AddressBean>>() {
-                    override fun onSucceed(bean: List<AddressBean>) {
+                    override fun onSucceed(bean: List<AddressBean>?) {
                         super.onSucceed(bean)
                         showContentLayout()
-                        if (bean.isEmpty()) {
+                        if (bean == null || bean.isEmpty()) {
                             mExBaseAdapter.setShowState(IShowState.EMPTY)
                         } else {
                             mExBaseAdapter.setShowState(IShowState.NORMAL)

@@ -27,6 +27,7 @@ import com.angcyo.rcode.zxing.view.ViewfinderView;
 import com.angcyo.sharebook.R;
 import com.angcyo.uiview.base.UIContentView;
 import com.angcyo.uiview.model.TitleBarPattern;
+import com.angcyo.uiview.resources.AnimUtil;
 import com.angcyo.uiview.skin.SkinHelper;
 import com.angcyo.uiview.utils.T_;
 import com.google.zxing.BarcodeFormat;
@@ -162,6 +163,7 @@ public class RScanUIView extends UIContentView implements SurfaceHolder.Callback
                         @Override
                         public void call(Boolean aBoolean) {
                             if (aBoolean) {
+                                AnimUtil.startArgb(mSurfaceView, Color.BLACK, Color.TRANSPARENT, 200);
                                 initCamera(surfaceHolder);
                             } else {
                                 displayFrameworkBugMessageAndExit();
