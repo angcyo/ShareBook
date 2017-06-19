@@ -136,7 +136,7 @@ public class MyOrderUIView extends BaseRecyclerUIView<String, BookDetailBean, St
         L.e("submitOrder() -> " + orderinfo.toString());
 
         add(RRetrofit.create(Api.class)
-                .api(P.b("orderinfo:" + orderinfo.toString()))
+                .api(P.b(Action.SUBMIT_ORDER, "orderinfo:" + orderinfo.toString()))
                 .compose(RxBook.transformer(String.class))
                 .subscribe(new BSub<String>() {
                     @Override

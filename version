@@ -2,8 +2,8 @@
     "code":0,
     "msg":"yes",
     "data":{
-               "version_name":"1.0.10_RC1",
-               "version_code":"12",
+               "version_name":"1.0.10_RC2",
+               "version_code":"13",
                "des":"1:添加提交订单\n2:添加登录判断请求\n3:and so on.\n",
                "url":"http://git.oschina.net/angcyo/sharebook/raw/master/app.apk",
                "force":false
