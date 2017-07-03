@@ -12,8 +12,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.angcyo.library.utils.L;
@@ -204,18 +202,6 @@ public class RScanUIView extends UIContentView implements SurfaceHolder.Callback
         super.onViewUnload();
         inactivityTimer.shutdown();
         mViewfinderView.recycleLineDrawable();
-    }
-
-    /**
-     * 保持屏幕常亮
-     */
-    private void keepScreenOn(boolean keep) {
-        Window window = mActivity.getWindow();
-        if (keep) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
     }
 
     /**

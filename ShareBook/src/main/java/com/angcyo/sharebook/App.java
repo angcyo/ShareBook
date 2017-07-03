@@ -8,12 +8,7 @@ import com.angcyo.uiview.Root;
 import com.angcyo.uiview.net.RRetrofit;
 import com.angcyo.uiview.skin.SkinHelper;
 import com.angcyo.umeng.UM;
-import com.github.moduth.blockcanary.BlockCanary;
-import com.hn.d.valley.AppBlockCanaryContext;
 import com.liulishuo.FDown;
-
-import jp.wasabeef.takt.Seat;
-import jp.wasabeef.takt.Takt;
 
 /**
  * Created by angcyo on 2017-03-11.
@@ -37,11 +32,11 @@ public class App extends RApplication {
         FDown.init(this, false);
 
         if (BuildConfig.SHOW_DEBUG) {
-            Takt.stock(this)
-                    .seat(Seat.TOP_CENTER)
-                    .play();
+//            Takt.stock(this)
+//                    .seat(Seat.TOP_CENTER)
+//                    .play();
 
-            BlockCanary.install(this, new AppBlockCanaryContext()).start();
+//            BlockCanary.install(this, new AppBlockCanaryContext()).start();
         }
 
         UM.init(this, BuildConfig.DEBUG);

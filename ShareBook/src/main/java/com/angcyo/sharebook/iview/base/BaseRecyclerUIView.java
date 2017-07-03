@@ -30,7 +30,7 @@ public abstract class BaseRecyclerUIView<H, T, F> extends UIRecyclerUIView<H, T,
         if (isShowInViewPager()) {
             return null;
         }
-        if (!haveOtherILayout()) {
+        if (!haveParentILayout()) {
             return super.getTitleBar().setShowBackImageView(true);
         }
         return super.getTitleBar();
